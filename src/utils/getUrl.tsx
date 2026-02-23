@@ -4,7 +4,7 @@ const getUrl = async (publicId: string, resourceType: string) => {
     console.log("📁 resourceType:", resourceType);
 
     const ipAddress = import.meta.env.VITE_PUBLIC_IP_ADDRESS || "localhost:3000";
-    const endpoint = `http://${ipAddress}/get-signed-url`;
+    const endpoint = `${ipAddress}/sign-cloudinary`;
     console.log("🌐 Endpoint:", endpoint);
 
     const res = await fetch(endpoint, {

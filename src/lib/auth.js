@@ -128,7 +128,7 @@ export async function CreateDefaultSettings() {
     // using import.meta.env for Vite instead of process.env setup
     const ipAddress =
       import.meta.env.VITE_PUBLIC_IP_ADDRESS || "localhost:3000";
-    const res = await fetch(`http://${ipAddress}/create-default-settings`, {
+    const res = await fetch(`${ipAddress}/create-default-settings`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({

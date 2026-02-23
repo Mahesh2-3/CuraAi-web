@@ -83,7 +83,7 @@ export default function Home() {
     setUserMsg("");
 
     // 1. OPTIMISTIC UI UPDATE
-    const tempId = `temp-${Math.random().toString(36).substr(2, 9)}`;
+    const tempId = `temp-${Math.random().toString(36).substring(2, 11)}`;
     setMessages((prev) => [
       ...prev,
       {
@@ -180,7 +180,7 @@ export default function Home() {
       import.meta.env.VITE_PUBLIC_IP_ADDRESS || "localhost:3000";
 
     // Trigger AI
-    fetch(`http://${ipAddress}/ai-response`, {
+    fetch(`${ipAddress}/ai-response`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -196,7 +196,7 @@ export default function Home() {
     try {
       const ipAddress =
         import.meta.env.VITE_PUBLIC_IP_ADDRESS || "localhost:3000";
-      fetch(`http://${ipAddress}/analysis`, {
+      fetch(`${ipAddress}/analysis`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

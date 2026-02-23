@@ -4,7 +4,7 @@ export const deleteConversation = async (id: string | undefined, userId: string 
 
     try {
         const ipAddress = import.meta.env.VITE_PUBLIC_IP_ADDRESS || "localhost:3000";
-        await fetch(`http://${ipAddress}/delete-conversation`, {
+        await fetch(`${ipAddress}/delete-conversation`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
@@ -25,7 +25,7 @@ export const clearAllConversations = async (userId: string | undefined) => {
 
     try {
         const ipAddress = import.meta.env.VITE_PUBLIC_IP_ADDRESS || "localhost:3000";
-        await fetch(`http://${ipAddress}/delete-all-conversations`, {
+        await fetch(`${ipAddress}/delete-all-conversations`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({

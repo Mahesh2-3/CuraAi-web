@@ -153,7 +153,7 @@ export default function Uploads() {
       if (attachment) {
         const ipAddress =
           import.meta.env.VITE_PUBLIC_IP_ADDRESS || "localhost:3000";
-        const saveRes = await fetch(`http://${ipAddress}/save-upload`, {
+        const saveRes = await fetch(`${ipAddress}/save-upload`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({

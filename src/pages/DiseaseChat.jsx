@@ -119,7 +119,7 @@ export default function DiseaseChat() {
         import.meta.env.VITE_PUBLIC_IP_ADDRESS || "localhost:3000";
 
       // Trigger AI
-      fetch(`http://${ipAddress}/disease-chat`, {
+      fetch(`${ipAddress}/disease-chat`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
