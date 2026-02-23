@@ -73,31 +73,33 @@ export default function Layout() {
           </h1>
         </div>
 
-        <nav className="flex-1 space-y-2 overflow-y-auto pb-4">
-          {sidebarOptions.map((item) => {
-            const isActive =
-              location.pathname === item.link ||
-              (location.pathname === "/" && item.link === "/cough-analyzer");
-            const Icon = item.icon;
+        <nav className="flex-1 flex flex-col pb-4 overflow-hidden">
+          <div className="space-y-2 shrink-0">
+            {sidebarOptions.map((item) => {
+              const isActive =
+                location.pathname === item.link ||
+                (location.pathname === "/" && item.link === "/cough-analyzer");
+              const Icon = item.icon;
 
-            return (
-              <Link
-                key={item.label}
-                to={item.link === "/cough-analyzer" ? "/" : item.link}
-                className={`flex items-center gap-3 px-3 py-3 rounded-lg transition-colors ${
-                  isActive && location.pathname !== "/"
-                    ? "bg-[#3b82f6]/10 text-[#3b82f6]"
-                    : "text-zinc-500 hover:text-white hover:bg-zinc-700"
-                }`}
-              >
-                <Icon size={20} />
-                <span className="font-medium">{item.label}</span>
-              </Link>
-            );
-          })}
+              return (
+                <Link
+                  key={item.label}
+                  to={item.link === "/cough-analyzer" ? "/" : item.link}
+                  className={`flex items-center gap-3 px-3 py-3 rounded-lg transition-colors ${
+                    isActive && location.pathname !== "/"
+                      ? "bg-[#3b82f6]/10 text-[#3b82f6]"
+                      : "text-zinc-500 hover:text-white hover:bg-zinc-700"
+                  }`}
+                >
+                  <Icon size={20} />
+                  <span className="font-medium">{item.label}</span>
+                </Link>
+              );
+            })}
+          </div>
 
-          <div className="pt-4 mt-4 border-t border-zinc-700">
-            <div className="flex items-center justify-between px-3 mb-2">
+          <div className="flex-1 flex flex-col pt-4 mt-4 border-t border-zinc-700 min-h-0">
+            <div className="flex shrink-0 items-center justify-between px-3 mb-2">
               <span className="text-xs font-semibold text-zinc-400 uppercase tracking-wider">
                 Recent Chats
               </span>
@@ -105,7 +107,7 @@ export default function Layout() {
 
             <button
               onClick={handleNewChat}
-              className={`flex w-full items-center gap-3 px-3 py-3 rounded-lg transition-colors mb-2 ${
+              className={`flex shrink-0 w-full items-center gap-3 px-3 py-3 rounded-lg transition-colors mb-2 ${
                 !activeConversationId && location.pathname === "/"
                   ? "bg-[#3b82f6]/10 text-[#3b82f6] font-medium"
                   : "text-zinc-400 hover:text-white hover:bg-zinc-700"
@@ -115,7 +117,7 @@ export default function Layout() {
               <span>New Chat</span>
             </button>
 
-            <div className="space-y-1">
+            <div className="space-y-1 flex-1 overflow-y-auto hide-scrollbar">
               {conversations.map((chat) => {
                 const isActive =
                   activeConversationId === chat.id && location.pathname === "/";
@@ -123,7 +125,7 @@ export default function Layout() {
                   <button
                     key={chat.id}
                     onClick={() => handleSelectChat(chat.id)}
-                    className={`flex w-full items-center gap-3 px-3 py-2.5 rounded-lg transition-colors text-left ${
+                    className={`flex w-full items-center gap-3 px-3 py-2.5 rounded-lg transition-colors text-left shrink-0 ${
                       isActive
                         ? "bg-zinc-700 text-white font-medium"
                         : "text-zinc-500 hover:text-white hover:bg-zinc-800"

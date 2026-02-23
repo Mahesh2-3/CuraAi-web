@@ -6,9 +6,10 @@ import {
   HardDrive,
   Settings as SettingsIcon,
 } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function Settings() {
+  const navigate = useNavigate();
   const sections = [
     {
       title: "General",
@@ -17,13 +18,15 @@ export default function Settings() {
           label: "About Us",
           icon: HelpCircle,
           color: "text-blue-500",
-          bg: "bg-blue-50",
+          bg: "bg-blue-500/10",
+          path: "/profile/settings/about-us",
         },
         {
           label: "Support Info",
           icon: HelpCircle,
           color: "text-purple-500",
-          bg: "bg-purple-50",
+          bg: "bg-purple-500/10",
+          path: "/profile/settings/support-info",
         },
       ],
     },
@@ -34,19 +37,22 @@ export default function Settings() {
           label: "AI Behavior",
           icon: Cpu,
           color: "text-emerald-500",
-          bg: "bg-emerald-50",
+          bg: "bg-emerald-500/10",
+          path: "/profile/settings/ai-behavior",
         },
         {
           label: "Data Control",
           icon: HardDrive,
           color: "text-amber-500",
-          bg: "bg-amber-50",
+          bg: "bg-amber-500/10",
+          path: "/profile/settings/data-control",
         },
         {
           label: "Permissions",
           icon: Shield,
           color: "text-red-500",
-          bg: "bg-red-50",
+          bg: "bg-red-500/10",
+          path: "/profile/settings/permissions",
         },
       ],
     },
@@ -82,6 +88,7 @@ export default function Settings() {
                   return (
                     <button
                       key={i}
+                      onClick={() => navigate(item.path)}
                       className="w-full flex items-center justify-between p-4 hover:bg-zinc-800 transition-colors group text-left"
                     >
                       <div className="flex items-center gap-4">

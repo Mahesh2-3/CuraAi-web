@@ -1,1 +1,0 @@
-@beautifulMention see this error and after clearing this error,  the three servers are running frontend at 5173, backend at 5000, python at 5001 check env files are more and test the frontend you have to check every clickable button and do everyaction for testing
