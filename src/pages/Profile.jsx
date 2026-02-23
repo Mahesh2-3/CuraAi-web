@@ -50,13 +50,16 @@ export default function Profile() {
 
         {/* User Card */}
         <div className="bg-zinc-800 border border-zinc-700 rounded-2xl p-6 shadow-sm mb-6 flex items-start sm:items-center gap-6 flex-col sm:flex-row">
-          <div className="w-20 h-20 bg-[#3b82f6]/20 rounded-full flex items-center justify-center shrink-0">
-            <span className="text-2xl font-bold text-[#3b82f6] uppercase">
-              {userData?.name?.charAt(0) ||
-                userData?.fullName?.charAt(0) ||
-                user?.email?.charAt(0) ||
-                "U"}
-            </span>
+          <div className="w-20 h-20 rounded-full flex items-center justify-center shrink-0 border-2 border-zinc-700 overflow-hidden">
+            <img
+              src={
+                userData?.profileImage ||
+                user?.photoURL ||
+                "/images/defaultProfile.jpg"
+              }
+              alt="Profile"
+              className="w-full h-full object-cover"
+            />
           </div>
           <div className="flex-1 min-w-0 w-full">
             <h2 className="text-xl font-bold text-white truncate">

@@ -1,10 +1,9 @@
 import {
-  Activity,
   AlertTriangle,
   Hospital,
   FileText,
-  UploadCloud,
   User,
+  MessageSquare,
 } from "lucide-react";
 
 export const LANGUAGES = [
@@ -26,9 +25,9 @@ export const msgStyles = "p-4 mt-3 rounded-lg w-fit";
 
 export const sidebarOptions = [
   {
-    label: "Cough analyzer",
-    icon: Activity,
-    link: "/cough-analyzer",
+    label: "Chat",
+    icon: MessageSquare,
+    link: "/",
   },
   {
     label: "Diseases",
@@ -44,16 +43,6 @@ export const sidebarOptions = [
     label: "Get Summary",
     icon: FileText,
     link: "/get-summary",
-  },
-  {
-    label: "Uploads",
-    icon: UploadCloud,
-    link: "/uploads",
-  },
-  {
-    label: "Profile",
-    icon: User,
-    link: "/profile",
   },
 ];
 

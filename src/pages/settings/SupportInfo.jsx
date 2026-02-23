@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   ArrowLeft,
   HelpCircle,
@@ -10,36 +10,41 @@ import {
 } from "lucide-react";
 
 export default function SupportInfo() {
+  const navigate = useNavigate();
   const links = [
     {
       name: "FAQs",
       icon: HelpCircle,
       color: "text-blue-500",
       bg: "bg-blue-500/10",
+      link: "/profile/settings/support-info/faqs",
     },
     {
       name: "Report a Problem",
       icon: AlertTriangle,
       color: "text-red-500",
       bg: "bg-red-500/10",
+      link: "/profile/settings/support-info/report-a-problem",
     },
     {
       name: "AI Disclaimer",
       icon: Info,
       color: "text-amber-500",
       bg: "bg-amber-500/10",
+      link: "/profile/settings/support-info/ai-disclaimer",
     },
     {
       name: "Terms & Policies",
       icon: FileStack,
       color: "text-emerald-500",
       bg: "bg-emerald-500/10",
+      link: "/profile/settings/support-info/terms-policies",
     },
   ];
 
   return (
     <div className="flex flex-col h-full bg-zinc-900 p-6 lg:p-10 overflow-y-auto w-full">
-      <div className="max-w-2xl w-full mx-auto">
+      <div className="max-w-5xl w-full mx-auto">
         <div className="flex items-center gap-4 mb-8">
           <Link
             to="/profile/settings"
@@ -56,7 +61,7 @@ export default function SupportInfo() {
             return (
               <button
                 key={idx}
-                onClick={() => alert("This page is coming soon!")}
+                onClick={() => navigate(link.link)}
                 className="w-full flex items-center justify-between p-6 hover:bg-zinc-750 transition-colors group text-left"
               >
                 <div className="flex items-center gap-4">

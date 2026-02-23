@@ -116,7 +116,7 @@ export default function DiseaseChat() {
       });
 
       const ipAddress =
-        import.meta.env.VITE_PUBLIC_IP_ADDRESS || "localhost:3000";
+        import.meta.env.VITE_PUBLIC_IP_ADDRESS || "localhost:5000";
 
       // Trigger AI
       fetch(`${ipAddress}/disease-chat`, {
@@ -139,7 +139,7 @@ export default function DiseaseChat() {
       {/* Header */}
       <div className="flex items-center gap-4 bg-zinc-800 border-b border-zinc-700 px-4 md:px-8 py-4 shrink-0 shadow-sm z-10">
         <Link
-          to="/diseases"
+          to={`/diseases/${id}`}
           className="w-10 h-10 bg-zinc-800 border border-zinc-700 rounded-xl flex items-center justify-center hover:bg-zinc-700 transition-colors"
         >
           <ArrowLeft className="text-zinc-400" size={20} />
@@ -159,7 +159,7 @@ export default function DiseaseChat() {
           <div className="w-8 h-8 border-4 border-[#3b82f6]/30 border-t-[#3b82f6] rounded-full animate-spin"></div>
         </div>
       ) : (
-        <div className="flex-1 overflow-y-auto px-4 py-6 space-y-6">
+        <div className="flex-1 max-w-5xl w-full mx-auto overflow-y-auto px-4 py-6 space-y-6">
           {messages.length === 0 && (
             <div className="flex flex-col items-center flex-1 justify-center text-center mt-20 opacity-60">
               <Activity size={48} className="text-[#3b82f6] mb-4 opacity-50" />
@@ -187,9 +187,11 @@ export default function DiseaseChat() {
                 {item.role === "user" ? (
                   <p className="whitespace-pre-wrap">{item.message}</p>
                 ) : (
-                  <div className="prose prose-blue max-w-none prose-p:leading-relaxed prose-pre:bg-zinc-800 prose-pre:border prose-pre:border-zinc-700">
+                  <div className="prose prose-invert prose-blue max-w-none prose-p:leading-relaxed prose-pre:bg-zinc-800 prose-pre:border prose-pre:border-zinc-700">
                     <Markdown remarkPlugins={[remarkGfm]}>
-                      {item.message}
+                      {item.message
+                        ? item.message.replace(/\\([#*_\-`>![\]()])/g, "$1")
+                        : ""}
                     </Markdown>
                   </div>
                 )}
@@ -201,7 +203,7 @@ export default function DiseaseChat() {
       )}
 
       {/* Input Area */}
-      <div className="p-4 bg-zinc-800/80 backdrop-blur border-t border-zinc-700">
+      <div className="p-4 backdrop-blur">
         <form
           onSubmit={handleSend}
           className="flex items-end gap-2 max-w-4xl mx-auto relative group"

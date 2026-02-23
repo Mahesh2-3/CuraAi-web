@@ -63,7 +63,7 @@ export default function AiBehavior() {
 
   return (
     <div className="flex flex-col h-full bg-zinc-900 p-6 lg:p-10 overflow-y-auto w-full">
-      <div className="max-w-2xl w-full mx-auto">
+      <div className="max-w-5xl w-full mx-auto">
         <div className="flex items-center justify-between mb-8">
           <div className="flex items-center gap-4">
             <Link

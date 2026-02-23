@@ -5,7 +5,6 @@ import {
   MessageSquare,
   Activity,
   FileText,
-  Upload,
   ChevronRight,
 } from "lucide-react";
 
@@ -16,36 +15,29 @@ export default function DataControl() {
     {
       name: "Conversation History",
       icon: MessageSquare,
-      path: "/",
+      path: "/profile/settings/data-control/conversations",
       color: "text-blue-500",
       bg: "bg-blue-500/10",
     },
     {
       name: "Diseases History",
       icon: Activity,
-      path: "/diseases",
+      path: "/profile/settings/data-control/diseases",
       color: "text-emerald-500",
       bg: "bg-emerald-500/10",
     },
     {
       name: "Summary",
       icon: FileText,
-      path: "/get-summary",
+      path: "/profile/settings/data-control/summary",
       color: "text-purple-500",
       bg: "bg-purple-500/10",
-    },
-    {
-      name: "Uploads",
-      icon: Upload,
-      path: "/uploads",
-      color: "text-amber-500",
-      bg: "bg-amber-500/10",
     },
   ];
 
   return (
     <div className="flex flex-col h-full bg-zinc-900 p-6 lg:p-10 overflow-y-auto w-full">
-      <div className="max-w-2xl w-full mx-auto">
+      <div className="max-w-5xl w-full mx-auto">
         <div className="flex items-center gap-4 mb-8">
           <Link
             to="/profile/settings"

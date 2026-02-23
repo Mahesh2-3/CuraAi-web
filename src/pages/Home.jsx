@@ -65,6 +65,7 @@ export default function Home() {
         attachment: doc.data().attachment,
       }));
       setMessages(msgs);
+      console.log(msgs);
       setTimeout(scrollToBottom, 100);
     });
 
@@ -228,7 +229,7 @@ export default function Home() {
       )}
 
       {/* Chat Messages */}
-      <div className="flex-1 overflow-y-auto px-4 py-6 space-y-6">
+      <div className="flex-1 sm:w-[70%] w-full mx-auto overflow-y-auto hide-scrollbar px-4 py-6 space-y-6">
         {messages.map((item) => (
           <div
             key={item.id}
@@ -242,15 +243,17 @@ export default function Home() {
               className={`px-5 py-3.5 mt-1 text-[15px] leading-relaxed shadow-sm ${
                 item.role === "user"
                   ? "bg-[#3b82f6] text-white rounded-2xl rounded-tr-sm max-w-[85%] md:max-w-[75%]"
-                  : "bg-zinc-800 border border-zinc-700 text-zinc-100 rounded-2xl rounded-tl-sm max-w-[95%] md:max-w-[85%]"
+                  : "text-zinc-100 rounded-2xl rounded-tl-sm max-w-[95%] md:max-w-[85%]"
               }`}
             >
               {item.role === "user" ? (
                 <p className="whitespace-pre-wrap">{item.message}</p>
               ) : (
-                <div className="prose prose-blue max-w-none prose-p:leading-relaxed prose-pre:bg-zinc-800 prose-pre:border prose-pre:border-zinc-700">
+                <div className="prose prose-invert prose-blue max-w-none prose-p:leading-relaxed prose-pre:bg-zinc-800 prose-pre:border prose-pre:border-zinc-700">
                   <Markdown remarkPlugins={[remarkGfm]}>
-                    {item.message}
+                    {item.message
+                      ? item.message.replace(/\\([#*_\-`>![\]()])/g, "$1")
+                      : ""}
                   </Markdown>
                 </div>
               )}
@@ -261,7 +264,7 @@ export default function Home() {
       </div>
 
       {/* Input Area */}
-      <div className="p-4 bg-zinc-800/80 backdrop-blur border-t border-zinc-700">
+      <div className="p-4 backdrop-blur">
         <form
           onSubmit={handleSend}
           className="flex items-end gap-2 max-w-4xl mx-auto relative group"

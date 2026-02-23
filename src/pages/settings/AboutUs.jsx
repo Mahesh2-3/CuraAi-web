@@ -5,7 +5,7 @@ import { ArrowLeft } from "lucide-react";
 export default function AboutUs() {
   return (
     <div className="flex flex-col h-full bg-zinc-900 p-6 lg:p-10 overflow-y-auto">
-      <div className="max-w-2xl w-full mx-auto">
+      <div className="max-w-5xl w-full mx-auto">
         <div className="flex items-center gap-4 mb-8">
           <Link
             to="/profile/settings"

@@ -9,17 +9,30 @@ import { useState, useEffect } from "react";
 import { useAuth } from "../context/authContext";
 import { useConversation } from "../context/conversationContext";
 import { sidebarOptions } from "../constants/theme";
-import { LogOut, Plus, MessageSquare } from "lucide-react";
+import { LogOut, Plus, MessageSquare, Settings, Menu, X } from "lucide-react";
 import { db } from "../lib/firebaseConfig";
 import { collection, query, orderBy, onSnapshot } from "firebase/firestore";
 
 export default function Layout() {
-  const { user, loading, logout } = useAuth();
+  const { user, profile, loading, logout } = useAuth();
   const { activeConversationId, setActiveConversationId } = useConversation();
   const location = useLocation();
   const navigate = useNavigate();
 
   const [conversations, setConversations] = useState([]);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(window.innerWidth >= 768);
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 768) {
+        setIsSidebarOpen(true);
+      } else {
+        setIsSidebarOpen(false);
+      }
+    };
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   useEffect(() => {
     if (!user) return;
@@ -42,6 +55,7 @@ export default function Layout() {
     if (location.pathname !== "/") {
       navigate("/");
     }
+    if (window.innerWidth < 768) setIsSidebarOpen(false);
   };
 
   const handleSelectChat = (id) => {
@@ -49,6 +63,11 @@ export default function Layout() {
     if (location.pathname !== "/") {
       navigate("/");
     }
+    if (window.innerWidth < 768) setIsSidebarOpen(false);
+  };
+
+  const toggleSidebar = () => {
+    setIsSidebarOpen((prev) => !prev);
   };
 
   if (loading) {
@@ -64,60 +83,98 @@ export default function Layout() {
   }
 
   return (
-    <div className="flex h-screen bg-zinc-900 text-white overflow-hidden">
-      {/* Sidebar for Desktop / Tablet */}
-      <aside className="hidden md:flex flex-col w-64 border-r border-zinc-700 bg-zinc-800 shadow-sm h-full p-4 z-20">
-        <div className="mb-8">
-          <h1 className="text-2xl font-bold bg-gradient-to-r from-[#3b82f6] to-blue-600 bg-clip-text text-transparent">
-            CuraAi
-          </h1>
+    <div className="flex h-screen bg-zinc-900 text-white overflow-hidden relative">
+      {/* Mobile Overlay */}
+      {isSidebarOpen && (
+        <div
+          className="md:hidden fixed inset-0 bg-black/50 z-20"
+          onClick={() => setIsSidebarOpen(false)}
+        />
+      )}
+
+      {/* Sidebar */}
+      <aside
+        className={`fixed flex flex-col w-64 border-r border-zinc-700 bg-zinc-800 shadow-sm h-full p-4 z-30 transition-transform duration-300 ${
+          isSidebarOpen ? "translate-x-0" : "-translate-x-full"
+        }`}
+      >
+        <div className="flex items-center justify-between mb-6">
+          <div className="flex items-center gap-3 w-full">
+            <Link
+              to="/profile"
+              onClick={() => window.innerWidth < 768 && setIsSidebarOpen(false)}
+              className="shrink-0"
+            >
+              <img
+                src={
+                  profile?.profileImage ||
+                  user.photoURL ||
+                  "/images/defaultProfile.jpg"
+                }
+                alt="Profile"
+                className="w-10 h-10 rounded-full border border-zinc-600 object-cover hover:opacity-80 transition-opacity"
+              />
+            </Link>
+            <h1 className="text-2xl font-bold bg-gradient-to-r from-[#3b82f6] to-blue-600 bg-clip-text text-transparent">
+              CuraAi
+            </h1>
+          </div>
+          <button
+            onClick={() => setIsSidebarOpen(false)}
+            className="md:hidden text-zinc-400 hover:text-white"
+          >
+            <X size={24} />
+          </button>
         </div>
 
-        <nav className="flex-1 flex flex-col pb-4 overflow-hidden">
-          <div className="space-y-2 shrink-0">
+        <nav className="flex flex-col overflow-hidden h-full">
+          {/* Main Menu Items */}
+          <div className="space-y-1 shrink-0">
             {sidebarOptions.map((item) => {
-              const isActive =
-                location.pathname === item.link ||
-                (location.pathname === "/" && item.link === "/cough-analyzer");
+              const isActive = location.pathname === item.link;
+              console.log(location.pathname, item.link);
               const Icon = item.icon;
 
               return (
                 <Link
                   key={item.label}
-                  to={item.link === "/cough-analyzer" ? "/" : item.link}
-                  className={`flex items-center gap-3 px-3 py-3 rounded-lg transition-colors ${
-                    isActive && location.pathname !== "/"
+                  to={item.link}
+                  onClick={() =>
+                    window.innerWidth < 768 && setIsSidebarOpen(false)
+                  }
+                  className={`flex items-center gap-3 px-3 py-2.5 rounded-lg transition-colors ${
+                    isActive
                       ? "bg-[#3b82f6]/10 text-[#3b82f6]"
                       : "text-zinc-500 hover:text-white hover:bg-zinc-700"
                   }`}
                 >
                   <Icon size={20} />
-                  <span className="font-medium">{item.label}</span>
+                  <span className="font-medium text-sm">{item.label}</span>
                 </Link>
               );
             })}
           </div>
 
-          <div className="flex-1 flex flex-col pt-4 mt-4 border-t border-zinc-700 min-h-0">
+          {/* Chat History Block (Taking remaining height visually via flex) */}
+          <div className="flex flex-col mt-4 pt-4 border-t border-zinc-700 flex-1 overflow-hidden shrink-0">
+            <button
+              onClick={handleNewChat}
+              className={`flex shrink-0 w-full items-center justify-center gap-3 px-3 py-2.5 rounded-lg transition-colors mb-2 ${
+                !activeConversationId && location.pathname === "/"
+                  ? "bg-[#3b82f6]/10 text-[#3b82f6] font-medium"
+                  : "text-zinc-400 hover:text-white bg-zinc-700"
+              }`}
+            >
+              <Plus size={20} />
+              <span className="text-sm">New Chat</span>
+            </button>
             <div className="flex shrink-0 items-center justify-between px-3 mb-2">
               <span className="text-xs font-semibold text-zinc-400 uppercase tracking-wider">
                 Recent Chats
               </span>
             </div>
 
-            <button
-              onClick={handleNewChat}
-              className={`flex shrink-0 w-full items-center gap-3 px-3 py-3 rounded-lg transition-colors mb-2 ${
-                !activeConversationId && location.pathname === "/"
-                  ? "bg-[#3b82f6]/10 text-[#3b82f6] font-medium"
-                  : "text-zinc-400 hover:text-white hover:bg-zinc-700"
-              }`}
-            >
-              <Plus size={20} />
-              <span>New Chat</span>
-            </button>
-
-            <div className="space-y-1 flex-1 overflow-y-auto hide-scrollbar">
+            <div className="space-y-1 flex-1 overflow-y-auto hide-scrollbar pb-2">
               {conversations.map((chat) => {
                 const isActive =
                   activeConversationId === chat.id && location.pathname === "/";
@@ -125,14 +182,14 @@ export default function Layout() {
                   <button
                     key={chat.id}
                     onClick={() => handleSelectChat(chat.id)}
-                    className={`flex w-full items-center gap-3 px-3 py-2.5 rounded-lg transition-colors text-left shrink-0 ${
+                    className={`flex w-full items-center gap-3 px-3 py-2 rounded-lg transition-colors text-left shrink-0 ${
                       isActive
                         ? "bg-zinc-700 text-white font-medium"
                         : "text-zinc-500 hover:text-white hover:bg-zinc-800"
                     }`}
                   >
-                    <MessageSquare size={18} className="shrink-0" />
-                    <span className="truncate text-sm">
+                    <MessageSquare size={16} className="shrink-0" />
+                    <span className="truncate text-xs">
                       {chat.title || "New Chat"}
                     </span>
                   </button>
@@ -142,50 +199,51 @@ export default function Layout() {
           </div>
         </nav>
 
-        <div className="mt-auto pt-4 border-t border-zinc-700">
+        {/* Bottom Actions */}
+        <div className="mt-auto pt-3 border-t border-zinc-700 shrink-0">
+          <Link
+            to="/profile/settings"
+            onClick={() => window.innerWidth < 768 && setIsSidebarOpen(false)}
+            className={`flex w-full items-center gap-3 px-3 py-2.5 rounded-lg transition-colors mb-1 ${
+              location.pathname.startsWith("/profile/settings")
+                ? "bg-zinc-700 text-white"
+                : "text-zinc-500 hover:text-white hover:bg-zinc-700"
+            }`}
+          >
+            <Settings size={20} />
+            <span className="font-medium text-sm">Settings</span>
+          </Link>
+
           <button
             onClick={logout}
-            className="flex w-full items-center gap-3 px-3 py-3 rounded-lg text-zinc-500 hover:text-red-500 hover:bg-red-50 transition-colors"
+            className="flex w-full items-center gap-3 px-3 py-2.5 rounded-lg text-zinc-500 hover:text-red-500 hover:bg-red-50/10 transition-colors"
           >
             <LogOut size={20} />
-            <span className="font-medium">Logout</span>
+            <span className="font-medium text-sm">Logout</span>
           </button>
         </div>
       </aside>
 
       {/* Main Content Area */}
-      <main className="flex-1 relative overflow-y-auto">
-        <div className="max-w-7xl mx-auto w-full min-h-full">
+      <main
+        className={`flex-1 relative flex flex-col h-screen overflow-hidden transition-all duration-300 ${isSidebarOpen ? "ml-64" : "ml-0"}`}
+      >
+        {/* Main Content Header for Global Toggle Button (Mobile/Desktop logic for hidden sidebar) */}
+        {!isSidebarOpen && (
+          <div className="absolute top-4 left-4 z-10">
+            <button
+              onClick={toggleSidebar}
+              className="p-2 rounded-lg bg-zinc-800 text-zinc-400 hover:text-white shadow-md border border-zinc-700 hover:bg-zinc-700 transition-colors"
+            >
+              <Menu size={24} />
+            </button>
+          </div>
+        )}
+
+        <div className="flex-1 overflow-y-auto w-full">
           <Outlet />
         </div>
       </main>
-
-      {/* Mobile Bottom Navigation Menu */}
-      <nav className="md:hidden fixed bottom-0 left-0 right-0 border-t border-zinc-700 bg-zinc-800/90 backdrop-blur pb-safe pt-2 px-2 z-50 shadow-[0_-4px_20px_rgba(0,0,0,0.05)]">
-        <div className="flex justify-around items-center">
-          {sidebarOptions.map((item) => {
-            const isActive =
-              location.pathname === item.link ||
-              (location.pathname === "/" && item.link === "/cough-analyzer");
-            const Icon = item.icon;
-
-            return (
-              <Link
-                key={item.label}
-                to={item.link === "/cough-analyzer" ? "/" : item.link}
-                className={`flex flex-col items-center p-2 rounded-lg ${
-                  isActive ? "text-[#3b82f6]" : "text-zinc-400"
-                }`}
-              >
-                <Icon size={24} />
-                <span className="text-[10px] mt-1 font-medium">
-                  {item.label.split(" ")[0]}
-                </span>
-              </Link>
-            );
-          })}
-        </div>
-      </nav>
     </div>
   );
 }

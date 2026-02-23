@@ -85,7 +85,6 @@ export default function GetSummary() {
 
   useEffect(() => {
     checkFirebaseAndFetch(activeTab, false);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeTab]);
 
   const handleRefresh = () => {
@@ -145,7 +144,7 @@ export default function GetSummary() {
       </div>
 
       {/* Content Area */}
-      <div className="flex-1 bg-zinc-800 border border-zinc-700 rounded-2xl p-6 sm:p-8 overflow-y-auto shadow-sm">
+      <div className="flex-1 max-w-5xl w-full mx-auto p-6 sm:p-8 overflow-y-auto shadow-sm">
         {loading && !markdown ? (
           <div className="flex flex-col items-center justify-center h-full">
             <div className="w-12 h-12 border-4 border-[#3b82f6]/30 border-t-[#3b82f6] rounded-full animate-spin mb-4"></div>
@@ -154,16 +153,11 @@ export default function GetSummary() {
             </p>
           </div>
         ) : (
-          <div
-            className="prose prose-blue max-w-none 
-                          prose-headings:text-white prose-h1:text-2xl prose-h2:text-xl
-                          prose-p:text-zinc-700 prose-p:leading-relaxed
-                          prose-li:text-zinc-700
-                          prose-blockquote:border-[#3b82f6] prose-blockquote:bg-[#3b82f6]/5 prose-blockquote:px-4 prose-blockquote:py-2 prose-blockquote:rounded-r-lg prose-blockquote:not-italic
-                          prose-pre:bg-zinc-800 prose-pre:border prose-pre:border-zinc-700"
-          >
+          <div className="prose prose-invert prose-blue max-w-none prose-p:leading-relaxed prose-pre:bg-zinc-800 prose-pre:border prose-pre:border-zinc-700">
             <Markdown remarkPlugins={[remarkGfm]}>
-              {markdown || "No summary available for this time period."}
+              {markdown
+                ? markdown.replace(/\\([#*_\-`>![\]()])/g, "$1")
+                : "No summary available for this time period."}
             </Markdown>
           </div>
         )}
