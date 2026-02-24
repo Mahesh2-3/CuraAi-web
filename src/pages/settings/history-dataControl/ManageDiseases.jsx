@@ -12,11 +12,23 @@ import {
   getDocs,
   writeBatch,
 } from "firebase/firestore";
+import ConfirmModal from "../../../components/ConfirmModal";
 
 export default function ManageDiseases() {
   const { user } = useAuth();
   const [diseases, setDiseases] = useState([]);
   const [isClearing, setIsClearing] = useState(false);
+  const [modalState, setModalState] = useState({
+    isOpen: false,
+    title: "",
+    message: "",
+    type: "danger",
+    isAlert: false,
+    onConfirm: null,
+  });
+
+  const closeModal = () =>
+    setModalState((prev) => ({ ...prev, isOpen: false }));
 
   useEffect(() => {
     if (!user) return;
@@ -37,76 +49,115 @@ export default function ManageDiseases() {
 
   const deleteDiseaseWithChats = async (diseaseId) => {
     if (!user) return;
-    if (
-      !window.confirm(
-        "This will delete the disease and all its chats. Are you sure?",
-      )
-    )
-      return;
 
-    try {
-      const batch = writeBatch(db);
-      const chatSnap = await getDocs(
-        collection(db, "users", user.uid, "diseases", diseaseId, "chat"),
-      );
-      chatSnap.forEach((doc) => batch.delete(doc.ref));
-      batch.delete(doc(db, "users", user.uid, "diseases", diseaseId));
-      await batch.commit();
-    } catch (err) {
-      console.error("Error deleting disease:", err);
-      alert("Failed to delete disease.");
-    }
+    setModalState({
+      isOpen: true,
+      title: "Delete Disease",
+      message: "This will delete the disease and all its chats. Are you sure?",
+      type: "danger",
+      isAlert: false,
+      onConfirm: async () => {
+        try {
+          const batch = writeBatch(db);
+          const chatSnap = await getDocs(
+            collection(db, "users", user.uid, "diseases", diseaseId, "chat"),
+          );
+          chatSnap.forEach((doc) => batch.delete(doc.ref));
+          batch.delete(doc(db, "users", user.uid, "diseases", diseaseId));
+          await batch.commit();
+        } catch (err) {
+          console.error("Error deleting disease:", err);
+          setModalState({
+            isOpen: true,
+            title: "Error",
+            message: "Failed to delete disease.",
+            type: "danger",
+            isAlert: true,
+            onConfirm: null,
+          });
+        }
+      },
+    });
   };
 
   const clearDiseaseChat = async (diseaseId) => {
     if (!user) return;
-    if (
-      !window.confirm(
-        "This will delete only the chat messages for this disease. Are you sure?",
-      )
-    )
-      return;
 
-    try {
-      const batch = writeBatch(db);
-      const chatSnap = await getDocs(
-        collection(db, "users", user.uid, "diseases", diseaseId, "chat"),
-      );
-      chatSnap.forEach((doc) => batch.delete(doc.ref));
-      await batch.commit();
-      alert("Chat cleared successfully.");
-    } catch (err) {
-      console.error("Error clearing chat:", err);
-      alert("Failed to clear chat.");
-    }
+    setModalState({
+      isOpen: true,
+      title: "Clear Chat",
+      message:
+        "This will delete only the chat messages for this disease. Are you sure?",
+      type: "warning",
+      isAlert: false,
+      onConfirm: async () => {
+        try {
+          const batch = writeBatch(db);
+          const chatSnap = await getDocs(
+            collection(db, "users", user.uid, "diseases", diseaseId, "chat"),
+          );
+          chatSnap.forEach((doc) => batch.delete(doc.ref));
+          await batch.commit();
+          setModalState({
+            isOpen: true,
+            title: "Success",
+            message: "Chat cleared successfully.",
+            type: "success",
+            isAlert: true,
+            onConfirm: null,
+          });
+        } catch (err) {
+          console.error("Error clearing chat:", err);
+          setModalState({
+            isOpen: true,
+            title: "Error",
+            message: "Failed to clear chat.",
+            type: "danger",
+            isAlert: true,
+            onConfirm: null,
+          });
+        }
+      },
+    });
   };
 
   const clearAllDiseases = async () => {
     if (!user || diseases.length === 0) return;
-    if (
-      !window.confirm(
-        "All diseases and their chats will be permanently deleted. Are you sure?",
-      )
-    )
-      return;
 
-    setIsClearing(true);
-    try {
-      const batch = writeBatch(db);
-      for (const disease of diseases) {
-        const chatSnap = await getDocs(
-          collection(db, "users", user.uid, "diseases", disease.id, "chat"),
-        );
-        chatSnap.forEach((doc) => batch.delete(doc.ref));
-        batch.delete(doc(db, "users", user.uid, "diseases", disease.id));
-      }
-      await batch.commit();
-    } catch (err) {
-      console.error("Error clearing all diseases:", err);
-      alert("Failed to clear all diseases.");
-    } finally {
-      setIsClearing(false);
-    }
+    setModalState({
+      isOpen: true,
+      title: "Clear All Diseases",
+      message:
+        "All diseases and their chats will be permanently deleted. Are you sure?",
+      type: "danger",
+      isAlert: false,
+      onConfirm: async () => {
+        setIsClearing(true);
+        try {
+          const batch = writeBatch(db);
+          for (const disease of diseases) {
+            const chatSnap = await getDocs(
+              collection(db, "users", user.uid, "diseases", disease.id, "chat"),
+            );
+            chatSnap.forEach((doc) => batch.delete(doc.ref));
+            batch.delete(doc(db, "users", user.uid, "diseases", disease.id));
+          }
+          await batch.commit();
+        } catch (err) {
+          console.error("Error clearing all diseases:", err);
+          setModalState({
+            isOpen: true,
+            title: "Error",
+            message: "Failed to clear all diseases.",
+            type: "danger",
+            isAlert: true,
+            onConfirm: null,
+          });
+        } finally {
+          setIsClearing(false);
+        }
+      },
+    });
   };
 
   return (
@@ -177,6 +228,23 @@ export default function ManageDiseases() {
           </div>
         )}
       </div>
+
+      <ConfirmModal
+        isOpen={modalState.isOpen}
+        onClose={closeModal}
+        onConfirm={modalState.onConfirm}
+        title={modalState.title}
+        message={modalState.message}
+        type={modalState.type}
+        isAlert={modalState.isAlert}
+        confirmText={
+          modalState.type === "danger"
+            ? "Delete"
+            : modalState.type === "warning"
+              ? "Clear"
+              : "OK"
+        }
+      />
     </div>
   );
 }

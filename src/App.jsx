@@ -6,6 +6,7 @@ import Layout from "./components/Layout";
 
 import Login from "./pages/auth/Login";
 import Signup from "./pages/auth/Signup";
+import Onboarding from "./pages/auth/Onboarding";
 
 import Home from "./pages/Home";
 import Diseases from "./pages/Diseases";
@@ -39,6 +40,7 @@ function App() {
           <Routes>
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
+            <Route path="/onboarding" element={<Onboarding />} />
 
             <Route element={<Layout />}>
               <Route path="/" element={<Home />} />

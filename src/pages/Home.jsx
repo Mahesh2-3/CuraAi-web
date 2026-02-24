@@ -267,7 +267,7 @@ export default function Home() {
       <div className="p-4 backdrop-blur">
         <form
           onSubmit={handleSend}
-          className="flex items-end gap-2 max-w-4xl mx-auto relative group"
+          className="flex items-center gap-2 max-w-4xl mx-auto relative group"
         >
           <div className="flex-1 bg-zinc-800 border border-zinc-700 focus-within:border-[#3b82f6] focus-within:ring-1 focus-within:ring-[#3b82f6] rounded-2xl transition-all shadow-sm">
             <textarea
@@ -297,7 +297,7 @@ export default function Home() {
             />
           </button>
         </form>
-        <p className="text-center text-xs text-zinc-400 mt-2">
+        <p className="text-center sm:text-xs text-[10px] text-zinc-400 mt-2">
           CuraAi can make mistakes. Consider verifying medical advice with a
           professional.
         </p>

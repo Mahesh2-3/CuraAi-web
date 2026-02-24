@@ -9,15 +9,26 @@ import {
   orderBy,
   onSnapshot,
   doc,
-  deleteDoc,
   writeBatch,
   getDocs,
 } from "firebase/firestore";
+import ConfirmModal from "../../../components/ConfirmModal";
 
 export default function ManageConversation() {
   const { user } = useAuth();
   const [conversations, setConversations] = useState([]);
   const [isClearing, setIsClearing] = useState(false);
+  const [modalState, setModalState] = useState({
+    isOpen: false,
+    title: "",
+    message: "",
+    type: "danger",
+    isAlert: false,
+    onConfirm: null,
+  });
+
+  const closeModal = () =>
+    setModalState((prev) => ({ ...prev, isOpen: false }));
 
   useEffect(() => {
     if (!user) return;
@@ -38,63 +49,87 @@ export default function ManageConversation() {
 
   const deleteConversationAndMessages = async (id) => {
     if (!user) return;
-    if (!window.confirm("Are you sure you want to delete this conversation?"))
-      return;
 
-    try {
-      const batch = writeBatch(db);
+    setModalState({
+      isOpen: true,
+      title: "Delete Conversation",
+      message: "Are you sure you want to delete this conversation?",
+      type: "danger",
+      isAlert: false,
+      onConfirm: async () => {
+        try {
+          const batch = writeBatch(db);
 
-      // Delete messages
-      const msgsSnap = await getDocs(
-        collection(db, "users", user.uid, "conversations", id, "messages"),
-      );
-      msgsSnap.forEach((msgDoc) => batch.delete(msgDoc.ref));
+          // Delete messages
+          const msgsSnap = await getDocs(
+            collection(db, "users", user.uid, "conversations", id, "messages"),
+          );
+          msgsSnap.forEach((msgDoc) => batch.delete(msgDoc.ref));
 
-      // Delete conversation doc
-      batch.delete(doc(db, "users", user.uid, "conversations", id));
+          // Delete conversation doc
+          batch.delete(doc(db, "users", user.uid, "conversations", id));
 
-      await batch.commit();
-    } catch (err) {
-      console.error("Error deleting conversation:", err);
-      alert("Failed to delete conversation.");
-    }
+          await batch.commit();
+        } catch (err) {
+          console.error("Error deleting conversation:", err);
+          setModalState({
+            isOpen: true,
+            title: "Error",
+            message: "Failed to delete conversation.",
+            type: "danger",
+            isAlert: true,
+            onConfirm: null,
+          });
+        }
+      },
+    });
   };
 
   const clearAllConversations = async () => {
     if (!user || conversations.length === 0) return;
-    if (
-      !window.confirm(
-        "Are you sure you want to permanently delete ALL conversations?",
-      )
-    )
-      return;
 
-    setIsClearing(true);
-    try {
-      const batch = writeBatch(db);
+    setModalState({
+      isOpen: true,
+      title: "Clear All Conversations",
+      message: "Are you sure you want to permanently delete ALL conversations?",
+      type: "danger",
+      isAlert: false,
+      onConfirm: async () => {
+        setIsClearing(true);
+        try {
+          const batch = writeBatch(db);
 
-      for (const chat of conversations) {
-        const msgsSnap = await getDocs(
-          collection(
-            db,
-            "users",
-            user.uid,
-            "conversations",
-            chat.id,
-            "messages",
-          ),
-        );
-        msgsSnap.forEach((msgDoc) => batch.delete(msgDoc.ref));
-        batch.delete(doc(db, "users", user.uid, "conversations", chat.id));
-      }
+          for (const chat of conversations) {
+            const msgsSnap = await getDocs(
+              collection(
+                db,
+                "users",
+                user.uid,
+                "conversations",
+                chat.id,
+                "messages",
+              ),
+            );
+            msgsSnap.forEach((msgDoc) => batch.delete(msgDoc.ref));
+            batch.delete(doc(db, "users", user.uid, "conversations", chat.id));
+          }
 
-      await batch.commit();
-    } catch (err) {
-      console.error("Error clearing all conversations:", err);
-      alert("Failed to clear conversations.");
-    } finally {
-      setIsClearing(false);
-    }
+          await batch.commit();
+        } catch (err) {
+          console.error("Error clearing all conversations:", err);
+          setModalState({
+            isOpen: true,
+            title: "Error",
+            message: "Failed to clear conversations.",
+            type: "danger",
+            isAlert: true,
+            onConfirm: null,
+          });
+        } finally {
+          setIsClearing(false);
+        }
+      },
+    });
   };
 
   return (
@@ -154,6 +189,17 @@ export default function ManageConversation() {
           </div>
         )}
       </div>
+
+      <ConfirmModal
+        isOpen={modalState.isOpen}
+        onClose={closeModal}
+        onConfirm={modalState.onConfirm}
+        title={modalState.title}
+        message={modalState.message}
+        type={modalState.type}
+        isAlert={modalState.isAlert}
+        confirmText={modalState.type === "danger" ? "Delete" : "OK"}
+      />
     </div>
   );
 }

@@ -1,12 +1,11 @@
 import { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { auth, db } from "../lib/firebaseConfig";
 import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
 import { Plus, ChevronRight, Activity } from "lucide-react";
+import ConfirmModal from "../components/ConfirmModal";
 
 export default function Diseases() {
-  const navigate = useNavigate();
-
   const [diseases, setDiseases] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -15,6 +14,16 @@ export default function Diseases() {
   const [diseaseName, setDiseaseName] = useState("");
   const [diseaseDetails, setDiseaseDetails] = useState("");
   const [submitting, setSubmitting] = useState(false);
+  const [modalState, setModalState] = useState({
+    isOpen: false,
+    title: "",
+    message: "",
+    type: "danger",
+    isAlert: true,
+  });
+
+  const closeModal = () =>
+    setModalState((prev) => ({ ...prev, isOpen: false }));
 
   /* =========================
      FETCH DISEASES FROM FIREBASE
@@ -50,7 +59,13 @@ export default function Diseases() {
       },
       (error) => {
         console.error("FETCH DISEASES ERROR:", error);
-        alert("Failed to load diseases");
+        setModalState({
+          isOpen: true,
+          title: "Error",
+          message: "Failed to load diseases",
+          type: "danger",
+          isAlert: true,
+        });
         setLoading(false);
       },
     );
@@ -60,7 +75,6 @@ export default function Diseases() {
 
   useEffect(() => {
     fetchDiseases();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const sanitizeText = (text) => {
@@ -76,7 +90,13 @@ export default function Diseases() {
   ========================= */
   const handleAddDisease = async () => {
     if (!diseaseName.trim() || !diseaseDetails.trim()) {
-      alert("Please fill all fields");
+      setModalState({
+        isOpen: true,
+        title: "Validation Error",
+        message: "Please fill all fields",
+        type: "warning",
+        isAlert: true,
+      });
       return;
     }
 
@@ -98,7 +118,13 @@ export default function Diseases() {
       });
       const data = await res.json();
 
-      alert(data.message || "Disease added successfully");
+      setModalState({
+        isOpen: true,
+        title: "Success",
+        message: data.message || "Disease added successfully",
+        type: "success",
+        isAlert: true,
+      });
 
       setModalVisible(false);
       setDiseaseName("");
@@ -106,7 +132,13 @@ export default function Diseases() {
 
       // fetchDiseases automatically updates via onSnapshot
     } catch (err) {
-      alert("Failed to add disease");
+      setModalState({
+        isOpen: true,
+        title: "Error",
+        message: "Failed to add disease",
+        type: "danger",
+        isAlert: true,
+      });
       console.error(err.message);
     } finally {
       setSubmitting(false);
@@ -275,6 +307,16 @@ export default function Diseases() {
           </div>
         </div>
       )}
+
+      <ConfirmModal
+        isOpen={modalState.isOpen}
+        onClose={closeModal}
+        title={modalState.title}
+        message={modalState.message}
+        type={modalState.type}
+        isAlert={modalState.isAlert}
+        confirmText="OK"
+      />
     </div>
   );
 }

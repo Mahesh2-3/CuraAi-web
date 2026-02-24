@@ -30,7 +30,7 @@ import {
 import ConfirmModal from "./ConfirmModal";
 
 export default function Layout() {
-  const { user, profile, loading, logout } = useAuth();
+  const { user, profile, loading } = useAuth();
   const { activeConversationId, setActiveConversationId } = useConversation();
   const location = useLocation();
   const navigate = useNavigate();
@@ -42,12 +42,15 @@ export default function Layout() {
   const [chatToDelete, setChatToDelete] = useState(null);
 
   useEffect(() => {
+    let prevWidth = window.innerWidth;
     const handleResize = () => {
-      if (window.innerWidth >= 768) {
+      const currWidth = window.innerWidth;
+      if (currWidth >= 768 && prevWidth < 768) {
         setIsSidebarOpen(true);
-      } else {
+      } else if (currWidth < 768 && prevWidth >= 768) {
         setIsSidebarOpen(false);
       }
+      prevWidth = currWidth;
     };
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
@@ -190,7 +193,7 @@ export default function Layout() {
           </div>
           <button
             onClick={() => setIsSidebarOpen(false)}
-            className="md:hidden text-zinc-400 hover:text-white"
+            className="text-zinc-400 hover:text-white transition-colors"
           >
             <X size={24} />
           </button>

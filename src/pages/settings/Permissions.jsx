@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { ArrowLeft, MapPin, Camera, Mic } from "lucide-react";
+import ConfirmModal from "../../components/ConfirmModal";
 
 export default function Permissions() {
   const [permissions, setPermissions] = useState({
@@ -8,6 +9,16 @@ export default function Permissions() {
     camera: false,
     microphone: false,
   });
+  const [modalState, setModalState] = useState({
+    isOpen: false,
+    title: "",
+    message: "",
+    type: "info",
+    isAlert: true,
+  });
+
+  const closeModal = () =>
+    setModalState((prev) => ({ ...prev, isOpen: false }));
 
   useEffect(() => {
     // Mocking permissions check for web. In a real web app, we can use navigator.permissions API
@@ -41,9 +52,13 @@ export default function Permissions() {
   const handleToggle = (type) => {
     // In browsers, you cannot programmatically revoke permissions.
     // Instead, we just inform the user to use site settings.
-    alert(
-      `Please use your browser's site settings (usually the lock icon next to the URL) to change ${type} permissions.`,
-    );
+    setModalState({
+      isOpen: true,
+      title: "Permission Notice",
+      message: `Please use your browser's site settings (usually the lock icon next to the URL) to change ${type} permissions.`,
+      type: "info",
+      isAlert: true,
+    });
   };
 
   return (
@@ -127,6 +142,16 @@ export default function Permissions() {
           </div>
         </div>
       </div>
+
+      <ConfirmModal
+        isOpen={modalState.isOpen}
+        onClose={closeModal}
+        title={modalState.title}
+        message={modalState.message}
+        type={modalState.type}
+        isAlert={modalState.isAlert}
+        confirmText="OK"
+      />
     </div>
   );
 }

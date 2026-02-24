@@ -6,6 +6,7 @@ import { db } from "../../../lib/firebaseConfig";
 import { doc, getDoc, updateDoc, deleteDoc } from "firebase/firestore";
 import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
+import ConfirmModal from "../../../components/ConfirmModal";
 
 const summaryOptions = [
   { id: "chat", label: "Using chat data" },
@@ -18,6 +19,17 @@ export default function ManageSummary() {
   const [mode, setMode] = useState("chat");
   const [expanded, setExpanded] = useState(null);
   const [summaries, setSummaries] = useState({});
+  const [modalState, setModalState] = useState({
+    isOpen: false,
+    title: "",
+    message: "",
+    type: "danger",
+    isAlert: false,
+    onConfirm: null,
+  });
+
+  const closeModal = () =>
+    setModalState((prev) => ({ ...prev, isOpen: false }));
 
   useEffect(() => {
     if (!user) return;
@@ -70,22 +82,34 @@ export default function ManageSummary() {
 
   const deleteSummary = async (key) => {
     if (!user) return;
-    if (
-      !window.confirm("This summary will be permanently deleted. Are you sure?")
-    )
-      return;
 
-    try {
-      await deleteDoc(doc(db, "users", user.uid, "summaries", key));
-      setSummaries((prev) => {
-        const copy = { ...prev };
-        delete copy[key];
-        return copy;
-      });
-    } catch (err) {
-      console.error("Error deleting summary:", err);
-      alert("Failed to delete summary.");
-    }
+    setModalState({
+      isOpen: true,
+      title: "Delete Summary",
+      message: "This summary will be permanently deleted. Are you sure?",
+      type: "danger",
+      isAlert: false,
+      onConfirm: async () => {
+        try {
+          await deleteDoc(doc(db, "users", user.uid, "summaries", key));
+          setSummaries((prev) => {
+            const copy = { ...prev };
+            delete copy[key];
+            return copy;
+          });
+        } catch (err) {
+          console.error("Error deleting summary:", err);
+          setModalState({
+            isOpen: true,
+            title: "Error",
+            message: "Failed to delete summary.",
+            type: "danger",
+            isAlert: true,
+            onConfirm: null,
+          });
+        }
+      },
+    });
   };
 
   return (
@@ -201,6 +225,17 @@ export default function ManageSummary() {
           </div>
         )}
       </div>
+
+      <ConfirmModal
+        isOpen={modalState.isOpen}
+        onClose={closeModal}
+        onConfirm={modalState.onConfirm}
+        title={modalState.title}
+        message={modalState.message}
+        type={modalState.type}
+        isAlert={modalState.isAlert}
+        confirmText={modalState.type === "danger" ? "Delete" : "OK"}
+      />
     </div>
   );
 }

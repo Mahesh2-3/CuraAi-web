@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
   ArrowLeft,
   Shield,
@@ -5,11 +6,14 @@ import {
   HelpCircle,
   HardDrive,
   Settings as SettingsIcon,
+  Search,
 } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 
 export default function Settings() {
   const navigate = useNavigate();
+  const [searchQuery, setSearchQuery] = useState("");
+
   const sections = [
     {
       title: "General",
@@ -27,6 +31,38 @@ export default function Settings() {
           color: "text-purple-500",
           bg: "bg-purple-500/10",
           path: "/profile/settings/support-info",
+        },
+        {
+          label: "FAQs",
+          icon: HelpCircle,
+          color: "text-purple-500",
+          bg: "bg-purple-500/10",
+          path: "/profile/settings/support-info/faqs",
+          isInner: true,
+        },
+        {
+          label: "Report a Problem",
+          icon: HelpCircle,
+          color: "text-purple-500",
+          bg: "bg-purple-500/10",
+          path: "/profile/settings/support-info/report-a-problem",
+          isInner: true,
+        },
+        {
+          label: "AI Disclaimer",
+          icon: HelpCircle,
+          color: "text-purple-500",
+          bg: "bg-purple-500/10",
+          path: "/profile/settings/support-info/ai-disclaimer",
+          isInner: true,
+        },
+        {
+          label: "Terms & Policies",
+          icon: HelpCircle,
+          color: "text-purple-500",
+          bg: "bg-purple-500/10",
+          path: "/profile/settings/support-info/terms-policies",
+          isInner: true,
         },
       ],
     },
@@ -48,6 +84,30 @@ export default function Settings() {
           path: "/profile/settings/data-control",
         },
         {
+          label: "Manage Conversations",
+          icon: HardDrive,
+          color: "text-amber-500",
+          bg: "bg-amber-500/10",
+          path: "/profile/settings/data-control/conversations",
+          isInner: true,
+        },
+        {
+          label: "Manage Diseases",
+          icon: HardDrive,
+          color: "text-amber-500",
+          bg: "bg-amber-500/10",
+          path: "/profile/settings/data-control/diseases",
+          isInner: true,
+        },
+        {
+          label: "Manage Summary",
+          icon: HardDrive,
+          color: "text-amber-500",
+          bg: "bg-amber-500/10",
+          path: "/profile/settings/data-control/summary",
+          isInner: true,
+        },
+        {
           label: "Permissions",
           icon: Shield,
           color: "text-red-500",
@@ -57,6 +117,21 @@ export default function Settings() {
       ],
     },
   ];
+
+  const filteredSections = sections
+    .map((section) => ({
+      ...section,
+      items: section.items.filter((item) => {
+        const matchesSearch = item.label
+          .toLowerCase()
+          .includes(searchQuery.toLowerCase());
+        if (searchQuery.trim() === "") {
+          return !item.isInner;
+        }
+        return matchesSearch;
+      }),
+    }))
+    .filter((section) => section.items.length > 0);
 
   return (
     <div className="flex flex-col h-full bg-zinc-900 p-6 lg:p-10 overflow-y-auto">
@@ -76,41 +151,59 @@ export default function Settings() {
           </div>
         </div>
 
+        {/* Search Bar */}
+        <div className="mb-8 relative">
+          <input
+            type="text"
+            placeholder="Search settings..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="w-full bg-zinc-800 border border-zinc-700 rounded-xl px-4 py-3 pl-11 text-white placeholder:text-zinc-500 focus:outline-none focus:border-[#3b82f6] focus:ring-1 focus:ring-[#3b82f6] transition-colors"
+          />
+          <Search className="absolute left-4 top-3.5 text-zinc-500" size={18} />
+        </div>
+
         <div className="space-y-8">
-          {sections.map((section, idx) => (
-            <div key={idx}>
-              <h2 className="text-sm font-semibold text-zinc-500 uppercase tracking-wider mb-4 ml-2">
-                {section.title}
-              </h2>
-              <div className="bg-zinc-800 border border-zinc-700 rounded-2xl shadow-sm overflow-hidden divide-y divide-zinc-100">
-                {section.items.map((item, i) => {
-                  const Icon = item.icon;
-                  return (
-                    <button
-                      key={i}
-                      onClick={() => navigate(item.path)}
-                      className="w-full flex items-center justify-between p-4 hover:bg-zinc-800 transition-colors group text-left"
-                    >
-                      <div className="flex items-center gap-4">
-                        <div
-                          className={`w-10 h-10 ${item.bg} rounded-lg flex items-center justify-center group-hover:bg-zinc-800 group-hover:shadow-sm transition-all`}
-                        >
-                          <Icon className={item.color} size={20} />
+          {filteredSections.length > 0 ? (
+            filteredSections.map((section, idx) => (
+              <div key={idx}>
+                <h2 className="text-sm font-semibold text-zinc-500 uppercase tracking-wider mb-4 ml-2">
+                  {section.title}
+                </h2>
+                <div className="bg-zinc-800 border border-zinc-700 rounded-2xl shadow-sm overflow-hidden divide-y divide-zinc-100">
+                  {section.items.map((item, i) => {
+                    const Icon = item.icon;
+                    return (
+                      <button
+                        key={i}
+                        onClick={() => navigate(item.path)}
+                        className="w-full flex items-center justify-between p-4 hover:bg-zinc-800 transition-colors group text-left"
+                      >
+                        <div className="flex items-center gap-4">
+                          <div
+                            className={`w-10 h-10 ${item.bg} rounded-lg flex items-center justify-center group-hover:bg-zinc-800 group-hover:shadow-sm transition-all`}
+                          >
+                            <Icon className={item.color} size={20} />
+                          </div>
+                          <span className="font-medium text-white">
+                            {item.label}
+                          </span>
                         </div>
-                        <span className="font-medium text-white">
-                          {item.label}
-                        </span>
-                      </div>
-                      <ArrowLeft
-                        className="text-zinc-300 transform rotate-180"
-                        size={18}
-                      />
-                    </button>
-                  );
-                })}
+                        <ArrowLeft
+                          className="text-zinc-300 transform rotate-180"
+                          size={18}
+                        />
+                      </button>
+                    );
+                  })}
+                </div>
               </div>
+            ))
+          ) : (
+            <div className="text-center text-zinc-500 py-8">
+              No settings found matching "{searchQuery}"
             </div>
-          ))}
+          )}
         </div>
       </div>
     </div>

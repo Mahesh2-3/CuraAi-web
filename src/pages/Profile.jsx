@@ -118,7 +118,7 @@ export default function Profile() {
                 <span className="text-sm text-zinc-400 block mb-1">
                   Blood Group
                 </span>
-                <div className="inline-flex items-center gap-2 bg-zinc-900 border border-zinc-700 rounded-lg px-3 py-1.5 text-red-400 font-medium">
+                <div className="inline-flex items-center gap-2 bg-zinc-900 border border-zinc-700 rounded-lg px-3 py-1.5 text-blue-600 font-medium">
                   <Droplet size={16} />{" "}
                   {userData?.bloodGroup || "Not specified"}
                 </div>
@@ -153,7 +153,7 @@ export default function Profile() {
                     userData.allergies.map((allergy, idx) => (
                       <span
                         key={idx}
-                        className="bg-red-500/10 border border-red-500/20 text-red-400 rounded-lg px-3 py-1 text-sm"
+                        className="bg-red-500/10 border border-red-500/20 text-red-100 rounded-lg px-3 py-1 text-sm"
                       >
                         {allergy}
                       </span>
