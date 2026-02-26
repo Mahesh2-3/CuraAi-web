@@ -35,7 +35,7 @@ export default function ChatAttachment({ attachment }) {
       }}
       className="flex items-center gap-3 bg-zinc-800 px-4 py-3 mt-2 rounded-lg max-w-[80%] hover:bg-zinc-700 transition"
     >
-      <FileText size={28} className="text-zinc-400" />
+      <FileText size={28} className="text-zinc-300" />
 
       <div className="flex-1 text-left">
         <p className="font-medium text-white truncate max-w-[120px]">
@@ -43,7 +43,7 @@ export default function ChatAttachment({ attachment }) {
         </p>
 
         {attachment.bytes && (
-          <p className="text-xs text-zinc-400">
+          <p className="text-xs text-zinc-300">
             {(attachment.bytes / 1024).toFixed(1)} KB
           </p>
         )}

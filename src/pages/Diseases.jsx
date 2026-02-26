@@ -156,7 +156,7 @@ export default function Diseases() {
           <h1 className="text-3xl font-bold bg-gradient-to-r from-[#3b82f6] to-blue-600 bg-clip-text text-transparent mb-1">
             Your Diseases
           </h1>
-          <p className="text-zinc-400">
+          <p className="text-zinc-300">
             Track and manage your health conditions.
           </p>
         </div>
@@ -292,7 +292,7 @@ export default function Diseases() {
             <div className="flex justify-end gap-3 mt-8">
               <button
                 onClick={() => setModalVisible(false)}
-                className="px-5 py-2.5 rounded-xl text-zinc-400 hover:text-white hover:bg-zinc-700 transition-colors font-medium"
+                className="px-5 py-2.5 rounded-xl text-zinc-300 hover:text-white hover:bg-zinc-700 transition-colors font-medium"
               >
                 Cancel
               </button>

@@ -141,7 +141,7 @@ export default function Settings() {
             to="/profile"
             className="w-10 h-10 bg-zinc-800 border border-zinc-700 rounded-xl flex items-center justify-center hover:bg-zinc-800 transition-colors shadow-sm"
           >
-            <ArrowLeft className="text-zinc-400" size={20} />
+            <ArrowLeft className="text-zinc-300" size={20} />
           </Link>
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 bg-[#3b82f6]/10 rounded-xl flex items-center justify-center">

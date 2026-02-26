@@ -169,7 +169,7 @@ export default function ManageDiseases() {
               to="/profile/settings/data-control"
               className="w-10 h-10 bg-zinc-800 border border-zinc-700 rounded-xl flex items-center justify-center hover:bg-zinc-800 transition-colors shadow-sm shrink-0"
             >
-              <ArrowLeft className="text-zinc-400" size={20} />
+              <ArrowLeft className="text-zinc-300" size={20} />
             </Link>
             <h1 className="text-2xl font-bold text-white">Diseases History</h1>
           </div>
@@ -188,7 +188,7 @@ export default function ManageDiseases() {
         {diseases.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-20 bg-zinc-800 border border-zinc-700 rounded-2xl">
             <Activity size={48} className="text-zinc-600 mb-4" />
-            <p className="text-zinc-400 font-medium">No disease found</p>
+            <p className="text-zinc-300 font-medium">No disease found</p>
           </div>
         ) : (
           <div className="space-y-4">

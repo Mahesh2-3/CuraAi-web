@@ -11,7 +11,7 @@ export default function TermsPolicies() {
             to="/profile/settings/support-info"
             className="w-10 h-10 bg-zinc-800 border border-zinc-700 rounded-xl flex items-center justify-center hover:bg-zinc-800 transition-colors shadow-sm"
           >
-            <ArrowLeft className="text-zinc-400" size={20} />
+            <ArrowLeft className="text-zinc-300" size={20} />
           </Link>
           <h1 className="text-2xl font-bold text-white">Terms & Policies</h1>
         </div>
@@ -84,7 +84,7 @@ export default function TermsPolicies() {
           </section>
 
           <div className="pt-6 border-t border-zinc-700 text-center">
-            <p className="text-sm font-medium text-zinc-400">
+            <p className="text-sm font-medium text-zinc-300">
               Continued use of this app means you accept these Terms & Policies.
             </p>
           </div>

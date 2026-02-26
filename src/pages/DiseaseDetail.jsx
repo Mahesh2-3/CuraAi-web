@@ -68,7 +68,7 @@ export default function DiseaseDetail() {
   if (!diseaseData) {
     return (
       <div className="flex-1 h-full bg-zinc-900 flex items-center justify-center relative">
-        <div className="text-zinc-400 font-medium">Disease not found!</div>
+        <div className="text-zinc-300 font-medium">Disease not found!</div>
       </div>
     );
   }
@@ -152,7 +152,7 @@ export default function DiseaseDetail() {
             to="/diseases"
             className="w-10 h-10 bg-zinc-800 border border-zinc-700 rounded-xl flex items-center justify-center hover:bg-zinc-700 transition-colors shadow-sm shrink-0"
           >
-            <ArrowLeft className="text-zinc-400" size={20} />
+            <ArrowLeft className="text-zinc-300" size={20} />
           </Link>
           <div className="flex-1 flex items-center justify-between min-w-0">
             <h1 className="text-3xl font-bold text-white truncate pr-4">

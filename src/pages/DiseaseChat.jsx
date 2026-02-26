@@ -142,7 +142,7 @@ export default function DiseaseChat() {
           to={`/diseases/${id}`}
           className="w-10 h-10 bg-zinc-800 border border-zinc-700 rounded-xl flex items-center justify-center hover:bg-zinc-700 transition-colors"
         >
-          <ArrowLeft className="text-zinc-400" size={20} />
+          <ArrowLeft className="text-zinc-300" size={20} />
         </Link>
         <div className="flex items-center gap-3">
           <div className="w-10 h-10 bg-[#3b82f6]/10 rounded-xl flex items-center justify-center">
@@ -164,7 +164,7 @@ export default function DiseaseChat() {
             <div className="flex flex-col items-center flex-1 justify-center text-center mt-20 opacity-60">
               <Activity size={48} className="text-[#3b82f6] mb-4 opacity-50" />
               <p className="text-zinc-500 font-medium">No messages yet.</p>
-              <p className="text-zinc-400 text-sm max-w-xs mt-2">
+              <p className="text-zinc-300 text-sm max-w-xs mt-2">
                 Ask questions about your condition or request recommendations.
               </p>
             </div>
@@ -226,7 +226,7 @@ export default function DiseaseChat() {
           <button
             type="submit"
             disabled={!userMsg.trim() || sending}
-            className="flex-shrink-0 bg-[#3b82f6] hover:bg-blue-600 disabled:bg-zinc-200 disabled:text-zinc-400 text-white p-3.5 rounded-2xl transition-colors shadow-sm disabled:cursor-not-allowed"
+            className="flex-shrink-0 bg-[#3b82f6] hover:bg-blue-600 disabled:bg-zinc-200 disabled:text-zinc-300 text-white p-3.5 rounded-2xl transition-colors shadow-sm disabled:cursor-not-allowed"
           >
             <Send
               size={20}

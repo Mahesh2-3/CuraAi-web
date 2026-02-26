@@ -106,7 +106,7 @@ export default function GetSummary() {
               Health Summary
             </h1>
           </div>
-          <p className="text-zinc-400 mt-2">
+          <p className="text-zinc-300 mt-2">
             AI-generated summary of your recent conditions.
           </p>
         </div>
@@ -122,7 +122,7 @@ export default function GetSummary() {
                   className={`px-6 py-2 rounded-full text-sm font-semibold transition-all shadow-sm ${
                     isActive
                       ? "bg-[#3b82f6] text-white shadow-[#3b82f6]/20"
-                      : "text-zinc-400 hover:text-white hover:bg-zinc-700"
+                      : "text-zinc-300 hover:text-white hover:bg-zinc-700"
                   }`}
                 >
                   {tab.label}
@@ -132,7 +132,7 @@ export default function GetSummary() {
           </div>
           <button
             onClick={handleRefresh}
-            className="p-2.5 hover:bg-zinc-700 rounded-full text-zinc-400 hover:text-[#3b82f6] transition-colors"
+            className="p-2.5 hover:bg-zinc-700 rounded-full text-zinc-300 hover:text-[#3b82f6] transition-colors"
             title="Regenerate Summary"
           >
             <RefreshCw

@@ -54,7 +54,7 @@ export default function ConfirmModal({
       >
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 text-zinc-400 hover:text-white transition-colors"
+          className="absolute top-4 right-4 text-zinc-300 hover:text-white transition-colors"
         >
           <X size={20} />
         </button>
@@ -66,7 +66,7 @@ export default function ConfirmModal({
             {currentConfig.icon}
           </div>
           <h2 className="text-xl font-bold text-white mb-2">{title}</h2>
-          <p className="text-zinc-400 text-sm mb-6">{message}</p>
+          <p className="text-zinc-300 text-sm mb-6">{message}</p>
 
           <div className="flex w-full gap-3">
             {!isAlert && (

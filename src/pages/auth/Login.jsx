@@ -85,7 +85,7 @@ const Login = () => {
           <h1 className="text-3xl font-bold bg-gradient-to-r from-[#3b82f6] to-blue-600 bg-clip-text text-transparent mb-2">
             CuraAi
           </h1>
-          <p className="text-zinc-400">Welcome back! Sign in to continue.</p>
+          <p className="text-zinc-300">Welcome back! Sign in to continue.</p>
         </div>
 
         {error && (
@@ -101,11 +101,11 @@ const Login = () => {
               placeholder="Email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full bg-zinc-800 border border-zinc-700 rounded-xl px-4 py-3 text-white placeholder:text-zinc-400 focus:outline-none focus:border-[#3b82f6] focus:ring-1 focus:ring-[#3b82f6] transition-colors"
+              className="w-full bg-zinc-800 border border-zinc-700 rounded-xl px-4 py-3 text-white placeholder:text-zinc-300 focus:outline-none focus:border-[#3b82f6] focus:ring-1 focus:ring-[#3b82f6] transition-colors"
               required
             />
             <Mail
-              className="absolute right-4 top-3.5 text-zinc-400"
+              className="absolute right-4 top-3.5 text-zinc-300"
               size={20}
             />
           </div>
@@ -116,13 +116,13 @@ const Login = () => {
               placeholder="Password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full bg-zinc-800 border border-zinc-700 rounded-xl px-4 py-3 text-white placeholder:text-zinc-400 focus:outline-none focus:border-[#3b82f6] focus:ring-1 focus:ring-[#3b82f6] transition-colors"
+              className="w-full bg-zinc-800 border border-zinc-700 rounded-xl px-4 py-3 text-white placeholder:text-zinc-300 focus:outline-none focus:border-[#3b82f6] focus:ring-1 focus:ring-[#3b82f6] transition-colors"
               required
             />
             <button
               type="button"
               onClick={() => setIsPasswordShown(!isPasswordShown)}
-              className="absolute right-4 top-3.5 text-zinc-400 hover:text-white transition-colors"
+              className="absolute right-4 top-3.5 text-zinc-300 hover:text-white transition-colors"
             >
               {isPasswordShown ? <EyeOff size={20} /> : <Eye size={20} />}
             </button>
@@ -137,7 +137,7 @@ const Login = () => {
           </button>
         </form>
 
-        <div className="mt-8 text-center text-sm text-zinc-400">
+        <div className="mt-8 text-center text-sm text-zinc-300">
           Don't have an account?{" "}
           <Link
             to="/signup"

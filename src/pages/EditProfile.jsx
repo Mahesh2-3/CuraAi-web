@@ -191,7 +191,7 @@ export default function EditProfile() {
               to="/profile"
               className="w-10 h-10 bg-zinc-800 border border-zinc-700 rounded-xl flex items-center justify-center hover:bg-zinc-800 transition-colors shadow-sm"
             >
-              <ArrowLeft className="text-zinc-400" size={20} />
+              <ArrowLeft className="text-zinc-300" size={20} />
             </Link>
             <h1 className="text-2xl font-bold text-white">Edit Profile</h1>
           </div>
@@ -261,7 +261,7 @@ export default function EditProfile() {
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="space-y-1.5">
-                  <label className="text-sm font-medium text-zinc-400 ml-1">
+                  <label className="text-sm font-medium text-zinc-300 ml-1">
                     Full Name
                   </label>
                   <div className="relative">
@@ -275,14 +275,14 @@ export default function EditProfile() {
                       required
                     />
                     <User
-                      className="absolute left-4 top-3.5 text-zinc-400"
+                      className="absolute left-4 top-3.5 text-zinc-300"
                       size={18}
                     />
                   </div>
                 </div>
 
                 <div className="space-y-1.5">
-                  <label className="text-sm font-medium text-zinc-400 ml-1">
+                  <label className="text-sm font-medium text-zinc-300 ml-1">
                     Phone Number
                   </label>
                   <div className="relative">
@@ -295,14 +295,14 @@ export default function EditProfile() {
                       className="w-full bg-zinc-900 border border-zinc-700 rounded-xl px-4 py-3 pl-11 text-white focus:outline-none focus:border-[#3b82f6] focus:ring-1 focus:ring-[#3b82f6] transition-colors"
                     />
                     <Phone
-                      className="absolute left-4 top-3.5 text-zinc-400"
+                      className="absolute left-4 top-3.5 text-zinc-300"
                       size={18}
                     />
                   </div>
                 </div>
 
                 <div className="space-y-1.5">
-                  <label className="text-sm font-medium text-zinc-400 ml-1">
+                  <label className="text-sm font-medium text-zinc-300 ml-1">
                     Date of Birth
                   </label>
                   <input
@@ -317,7 +317,7 @@ export default function EditProfile() {
                 </div>
 
                 <div className="space-y-1.5">
-                  <label className="text-sm font-medium text-zinc-400 ml-1">
+                  <label className="text-sm font-medium text-zinc-300 ml-1">
                     Gender
                   </label>
                   <select
@@ -345,7 +345,7 @@ export default function EditProfile() {
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <div className="space-y-1.5">
-                  <label className="text-sm font-medium text-zinc-400 ml-1">
+                  <label className="text-sm font-medium text-zinc-300 ml-1">
                     Weight (kg)
                   </label>
                   <div className="relative">
@@ -358,14 +358,14 @@ export default function EditProfile() {
                       className="w-full bg-zinc-900 border border-zinc-700 rounded-xl px-4 py-3 pl-11 text-white focus:outline-none focus:border-[#3b82f6] focus:ring-1 focus:ring-[#3b82f6] transition-colors"
                     />
                     <Activity
-                      className="absolute left-4 top-3.5 text-zinc-400"
+                      className="absolute left-4 top-3.5 text-zinc-300"
                       size={18}
                     />
                   </div>
                 </div>
 
                 <div className="space-y-1.5">
-                  <label className="text-sm font-medium text-zinc-400 ml-1">
+                  <label className="text-sm font-medium text-zinc-300 ml-1">
                     Height (cm)
                   </label>
                   <div className="relative">
@@ -381,7 +381,7 @@ export default function EditProfile() {
                 </div>
 
                 <div className="space-y-1.5">
-                  <label className="text-sm font-medium text-zinc-400 ml-1">
+                  <label className="text-sm font-medium text-zinc-300 ml-1">
                     Blood Group
                   </label>
                   <div className="relative">
@@ -407,7 +407,7 @@ export default function EditProfile() {
 
               <div className="space-y-4">
                 <div className="space-y-1.5">
-                  <label className="text-sm font-medium text-zinc-400 ml-1">
+                  <label className="text-sm font-medium text-zinc-300 ml-1">
                     Chronic Conditions (comma-separated)
                   </label>
                   <textarea
@@ -422,7 +422,7 @@ export default function EditProfile() {
                 </div>
 
                 <div className="space-y-1.5">
-                  <label className="text-sm font-medium text-zinc-400 ml-1">
+                  <label className="text-sm font-medium text-zinc-300 ml-1">
                     Allergies (comma-separated)
                   </label>
                   <textarea
@@ -445,7 +445,7 @@ export default function EditProfile() {
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="space-y-1.5">
-                  <label className="text-sm font-medium text-zinc-400 ml-1">
+                  <label className="text-sm font-medium text-zinc-300 ml-1">
                     Contact Name
                   </label>
                   <div className="relative">
@@ -461,14 +461,14 @@ export default function EditProfile() {
                       className="w-full bg-zinc-900 border border-zinc-700 rounded-xl px-4 py-3 pl-11 text-white focus:outline-none focus:border-red-500 focus:ring-1 focus:ring-red-500 transition-colors"
                     />
                     <Users
-                      className="absolute left-4 top-3.5 text-zinc-400"
+                      className="absolute left-4 top-3.5 text-zinc-300"
                       size={18}
                     />
                   </div>
                 </div>
 
                 <div className="space-y-1.5">
-                  <label className="text-sm font-medium text-zinc-400 ml-1">
+                  <label className="text-sm font-medium text-zinc-300 ml-1">
                     Contact Phone
                   </label>
                   <div className="relative">
@@ -484,14 +484,14 @@ export default function EditProfile() {
                       className="w-full bg-zinc-900 border border-zinc-700 rounded-xl px-4 py-3 pl-11 text-white focus:outline-none focus:border-red-500 focus:ring-1 focus:ring-red-500 transition-colors"
                     />
                     <Phone
-                      className="absolute left-4 top-3.5 text-zinc-400"
+                      className="absolute left-4 top-3.5 text-zinc-300"
                       size={18}
                     />
                   </div>
                 </div>
 
                 <div className="space-y-1.5 md:col-span-2">
-                  <label className="text-sm font-medium text-zinc-400 ml-1">
+                  <label className="text-sm font-medium text-zinc-300 ml-1">
                     Relationship
                   </label>
                   <input

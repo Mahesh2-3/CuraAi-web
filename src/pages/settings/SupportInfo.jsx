@@ -50,7 +50,7 @@ export default function SupportInfo() {
             to="/profile/settings"
             className="w-10 h-10 bg-zinc-800 border border-zinc-700 rounded-xl flex items-center justify-center hover:bg-zinc-800 transition-colors shadow-sm"
           >
-            <ArrowLeft className="text-zinc-400" size={20} />
+            <ArrowLeft className="text-zinc-300" size={20} />
           </Link>
           <h1 className="text-2xl font-bold text-white">Support & Info</h1>
         </div>
@@ -85,7 +85,7 @@ export default function SupportInfo() {
 
         <div className="flex items-center justify-between p-6 bg-zinc-800 border border-zinc-700 rounded-2xl">
           <span className="text-lg font-medium text-white">App Version</span>
-          <span className="text-lg font-medium text-zinc-400">1.0.0</span>
+          <span className="text-lg font-medium text-zinc-300">1.0.0</span>
         </div>
       </div>
     </div>

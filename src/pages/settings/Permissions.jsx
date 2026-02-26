@@ -69,7 +69,7 @@ export default function Permissions() {
             to="/profile/settings"
             className="w-10 h-10 bg-zinc-800 border border-zinc-700 rounded-xl flex items-center justify-center hover:bg-zinc-800 transition-colors shadow-sm"
           >
-            <ArrowLeft className="text-zinc-400" size={20} />
+            <ArrowLeft className="text-zinc-300" size={20} />
           </Link>
           <h1 className="text-2xl font-bold text-white">App Permissions</h1>
         </div>

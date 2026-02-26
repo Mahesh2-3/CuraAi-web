@@ -183,7 +183,7 @@ export default function Layout() {
         <div className="flex items-center justify-between mb-6">
           <div className="flex items-center gap-3 w-full">
             <img
-              src={"/images/logo.png"}
+              src={"/images/logo.webp"}
               alt="logo"
               className="w-10 h-10 rounded-full border border-zinc-600 object-cover hover:opacity-80 transition-opacity"
             />
@@ -193,7 +193,8 @@ export default function Layout() {
           </div>
           <button
             onClick={() => setIsSidebarOpen(false)}
-            className="text-zinc-400 hover:text-white transition-colors"
+            className="text-zinc-300 hover:text-white transition-colors"
+            aria-label="Close sidebar"
           >
             <X size={24} />
           </button>
@@ -234,14 +235,14 @@ export default function Layout() {
               className={`flex shrink-0 w-full items-center justify-center gap-3 px-3 py-2.5 rounded-lg transition-colors mb-2 ${
                 !activeConversationId && location.pathname === "/"
                   ? "bg-[#3b82f6]/10 text-[#3b82f6] font-medium"
-                  : "text-zinc-400 hover:text-white bg-zinc-700"
+                  : "text-zinc-300 hover:text-white bg-zinc-700"
               }`}
             >
               <Plus size={20} />
               <span className="text-sm">New Chat</span>
             </button>
             <div className="flex shrink-0 items-center justify-between px-3 mb-2">
-              <span className="text-xs font-semibold text-zinc-400 uppercase tracking-wider">
+              <span className="text-xs font-semibold text-zinc-300 uppercase tracking-wider">
                 Recent Chats
               </span>
             </div>
@@ -345,7 +346,8 @@ export default function Layout() {
           <div className="absolute top-4 left-4 z-10">
             <button
               onClick={toggleSidebar}
-              className="p-2 rounded-lg bg-zinc-800 text-zinc-400 hover:text-white shadow-md border border-zinc-700 hover:bg-zinc-700 transition-colors"
+              className="p-2 rounded-lg bg-zinc-800 text-zinc-300 hover:text-white shadow-md border border-zinc-700 hover:bg-zinc-700 transition-colors"
+              aria-label="Open sidebar"
             >
               <Menu size={24} />
             </button>

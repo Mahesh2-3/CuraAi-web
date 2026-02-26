@@ -56,7 +56,7 @@ export default function FAQs() {
             to="/profile/settings/support-info"
             className="w-10 h-10 bg-zinc-800 border border-zinc-700 rounded-xl flex items-center justify-center hover:bg-zinc-800 transition-colors shadow-sm"
           >
-            <ArrowLeft className="text-zinc-400" size={20} />
+            <ArrowLeft className="text-zinc-300" size={20} />
           </Link>
           <h1 className="text-2xl font-bold text-white">FAQs</h1>
         </div>
@@ -77,7 +77,7 @@ export default function FAQs() {
                     {item.question}
                   </span>
                   <ChevronDown
-                    className={`text-zinc-400 shrink-0 transition-transform duration-200 ${
+                    className={`text-zinc-300 shrink-0 transition-transform duration-200 ${
                       isOpen ? "rotate-180" : ""
                     }`}
                     size={20}

@@ -44,7 +44,7 @@ export default function Profile() {
           </div>
           <div>
             <h1 className="text-3xl font-bold text-white">Profile</h1>
-            <p className="text-zinc-400">Manage your account and preferences</p>
+            <p className="text-zinc-300">Manage your account and preferences</p>
           </div>
         </div>
 
@@ -65,7 +65,7 @@ export default function Profile() {
             <h2 className="text-xl font-bold text-white truncate">
               {userData?.name || userData?.fullName || "Loading..."}
             </h2>
-            <p className="text-zinc-400 truncate mb-4">{user?.email}</p>
+            <p className="text-zinc-300 truncate mb-4">{user?.email}</p>
 
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-2">
               <div className="space-y-1">
@@ -115,7 +115,7 @@ export default function Profile() {
             </h3>
             <div className="space-y-4">
               <div>
-                <span className="text-sm text-zinc-400 block mb-1">
+                <span className="text-sm text-zinc-300 block mb-1">
                   Blood Group
                 </span>
                 <div className="inline-flex items-center gap-2 bg-zinc-900 border border-zinc-700 rounded-lg px-3 py-1.5 text-blue-600 font-medium">
@@ -124,7 +124,7 @@ export default function Profile() {
                 </div>
               </div>
               <div>
-                <span className="text-sm text-zinc-400 block mb-1">
+                <span className="text-sm text-zinc-300 block mb-1">
                   Chronic Conditions
                 </span>
                 <div className="flex flex-wrap gap-2">
@@ -145,7 +145,7 @@ export default function Profile() {
                 </div>
               </div>
               <div>
-                <span className="text-sm text-zinc-400 block mb-1">
+                <span className="text-sm text-zinc-300 block mb-1">
                   Allergies
                 </span>
                 <div className="flex flex-wrap gap-2">
@@ -175,7 +175,7 @@ export default function Profile() {
             </h3>
             <div className="space-y-4">
               <div>
-                <span className="text-sm text-zinc-400 block mb-1">Name</span>
+                <span className="text-sm text-zinc-300 block mb-1">Name</span>
                 <p className="text-white font-medium">
                   {userData?.emergency?.name || "Not specified"}
                 </p>
@@ -186,11 +186,11 @@ export default function Profile() {
                 )}
               </div>
               <div>
-                <span className="text-sm text-zinc-400 block mb-1">
+                <span className="text-sm text-zinc-300 block mb-1">
                   Phone Number
                 </span>
                 <div className="flex items-center gap-2 text-white font-medium">
-                  <Phone size={16} className="text-zinc-400" />
+                  <Phone size={16} className="text-zinc-300" />
                   {userData?.emergency?.phone || "Not specified"}
                 </div>
               </div>
@@ -207,14 +207,14 @@ export default function Profile() {
             <div className="flex items-center gap-4">
               <div className="w-10 h-10 bg-zinc-700 rounded-lg flex items-center justify-center group-hover:bg-zinc-600 transition-all">
                 <Edit3
-                  className="text-zinc-400 group-hover:text-white"
+                  className="text-zinc-300 group-hover:text-white"
                   size={20}
                 />
               </div>
               <span className="font-medium text-white">Edit Profile</span>
             </div>
             <ChevronRight
-              className="text-zinc-400 group-hover:text-white"
+              className="text-zinc-300 group-hover:text-white"
               size={20}
             />
           </Link>
@@ -226,14 +226,14 @@ export default function Profile() {
             <div className="flex items-center gap-4">
               <div className="w-10 h-10 bg-zinc-700 rounded-lg flex items-center justify-center group-hover:bg-zinc-600 transition-all">
                 <Settings
-                  className="text-zinc-400 group-hover:text-white"
+                  className="text-zinc-300 group-hover:text-white"
                   size={20}
                 />
               </div>
               <span className="font-medium text-white">Settings</span>
             </div>
             <ChevronRight
-              className="text-zinc-400 group-hover:text-white"
+              className="text-zinc-300 group-hover:text-white"
               size={20}
             />
           </Link>

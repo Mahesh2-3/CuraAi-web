@@ -25,7 +25,7 @@ export default function ReportProblem() {
           <h2 className="text-2xl font-bold text-white mb-2">
             Report Submited
           </h2>
-          <p className="text-zinc-400 mb-8">
+          <p className="text-zinc-300 mb-8">
             Thank you for bringing this to our attention. Our team will look
             into it.
           </p>
@@ -48,7 +48,7 @@ export default function ReportProblem() {
             to="/profile/settings/support-info"
             className="w-10 h-10 bg-zinc-800 border border-zinc-700 rounded-xl flex items-center justify-center hover:bg-zinc-800 transition-colors shadow-sm"
           >
-            <ArrowLeft className="text-zinc-400" size={20} />
+            <ArrowLeft className="text-zinc-300" size={20} />
           </Link>
           <h1 className="text-2xl font-bold text-white">Report a Problem</h1>
         </div>
@@ -63,7 +63,7 @@ export default function ReportProblem() {
           </p>
 
           <div className="space-y-1.5">
-            <label className="text-sm font-medium text-zinc-400 ml-1">
+            <label className="text-sm font-medium text-zinc-300 ml-1">
               What went wrong?
             </label>
             <select
@@ -83,7 +83,7 @@ export default function ReportProblem() {
           </div>
 
           <div className="space-y-1.5">
-            <label className="text-sm font-medium text-zinc-400 ml-1">
+            <label className="text-sm font-medium text-zinc-300 ml-1">
               Details
             </label>
             <textarea

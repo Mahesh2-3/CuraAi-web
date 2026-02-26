@@ -127,7 +127,7 @@ const Signup = () => {
           <h1 className="text-3xl font-bold bg-gradient-to-r from-[#3b82f6] to-blue-600 bg-clip-text text-transparent mb-2">
             Join CuraAi
           </h1>
-          <p className="text-zinc-400">Create an account to get started.</p>
+          <p className="text-zinc-300">Create an account to get started.</p>
         </div>
 
         {error && (
@@ -145,10 +145,10 @@ const Signup = () => {
                 placeholder="Full Name"
                 value={fullName}
                 onChange={(e) => setFullName(e.target.value)}
-                className="w-full bg-zinc-800 border border-zinc-700 rounded-xl px-4 py-3 pl-11 text-white placeholder:text-zinc-400 focus:outline-none focus:border-[#3b82f6] focus:ring-1 focus:ring-[#3b82f6] transition-colors"
+                className="w-full bg-zinc-800 border border-zinc-700 rounded-xl px-4 py-3 pl-11 text-white placeholder:text-zinc-300 focus:outline-none focus:border-[#3b82f6] focus:ring-1 focus:ring-[#3b82f6] transition-colors"
               />
               <User
-                className="absolute left-4 top-3.5 text-zinc-400"
+                className="absolute left-4 top-3.5 text-zinc-300"
                 size={18}
               />
             </div>
@@ -160,10 +160,10 @@ const Signup = () => {
                 placeholder="Email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full bg-zinc-800 border border-zinc-700 rounded-xl px-4 py-3 pl-11 text-white placeholder:text-zinc-400 focus:outline-none focus:border-[#3b82f6] focus:ring-1 focus:ring-[#3b82f6] transition-colors"
+                className="w-full bg-zinc-800 border border-zinc-700 rounded-xl px-4 py-3 pl-11 text-white placeholder:text-zinc-300 focus:outline-none focus:border-[#3b82f6] focus:ring-1 focus:ring-[#3b82f6] transition-colors"
               />
               <Mail
-                className="absolute left-4 top-3.5 text-zinc-400"
+                className="absolute left-4 top-3.5 text-zinc-300"
                 size={18}
               />
             </div>
@@ -175,12 +175,12 @@ const Signup = () => {
                 placeholder="Password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full bg-zinc-800 border border-zinc-700 rounded-xl px-4 py-3 text-white placeholder:text-zinc-400 focus:outline-none focus:border-[#3b82f6] focus:ring-1 focus:ring-[#3b82f6] transition-colors"
+                className="w-full bg-zinc-800 border border-zinc-700 rounded-xl px-4 py-3 text-white placeholder:text-zinc-300 focus:outline-none focus:border-[#3b82f6] focus:ring-1 focus:ring-[#3b82f6] transition-colors"
               />
               <button
                 type="button"
                 onClick={() => setIsPasswordShown(!isPasswordShown)}
-                className="absolute right-4 top-3.5 text-zinc-400 hover:text-white transition-colors"
+                className="absolute right-4 top-3.5 text-zinc-300 hover:text-white transition-colors"
               >
                 {isPasswordShown ? <EyeOff size={18} /> : <Eye size={18} />}
               </button>
@@ -193,14 +193,14 @@ const Signup = () => {
                 placeholder="Confirm Password"
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
-                className="w-full bg-zinc-800 border border-zinc-700 rounded-xl px-4 py-3 text-white placeholder:text-zinc-400 focus:outline-none focus:border-[#3b82f6] focus:ring-1 focus:ring-[#3b82f6] transition-colors"
+                className="w-full bg-zinc-800 border border-zinc-700 rounded-xl px-4 py-3 text-white placeholder:text-zinc-300 focus:outline-none focus:border-[#3b82f6] focus:ring-1 focus:ring-[#3b82f6] transition-colors"
               />
               <button
                 type="button"
                 onClick={() =>
                   setIsConfirmPasswordShown(!isConfirmPasswordShown)
                 }
-                className="absolute right-4 top-3.5 text-zinc-400 hover:text-white transition-colors"
+                className="absolute right-4 top-3.5 text-zinc-300 hover:text-white transition-colors"
               >
                 {isConfirmPasswordShown ? (
                   <EyeOff size={18} />
@@ -217,10 +217,10 @@ const Signup = () => {
                 placeholder="Phone Number (Optional)"
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
-                className="w-full bg-zinc-800 border border-zinc-700 rounded-xl px-4 py-3 pl-11 text-white placeholder:text-zinc-400 focus:outline-none focus:border-[#3b82f6] focus:ring-1 focus:ring-[#3b82f6] transition-colors"
+                className="w-full bg-zinc-800 border border-zinc-700 rounded-xl px-4 py-3 pl-11 text-white placeholder:text-zinc-300 focus:outline-none focus:border-[#3b82f6] focus:ring-1 focus:ring-[#3b82f6] transition-colors"
               />
               <Phone
-                className="absolute left-4 top-3.5 text-zinc-400"
+                className="absolute left-4 top-3.5 text-zinc-300"
                 size={18}
               />
             </div>
@@ -233,7 +233,7 @@ const Signup = () => {
                   value={dob}
                   max={new Date().toISOString().split("T")[0]}
                   onChange={(e) => setDob(e.target.value)}
-                  className="w-full bg-zinc-800 border border-zinc-700 rounded-xl px-4 py-3 text-white placeholder:text-zinc-400 focus:outline-none focus:border-[#3b82f6] focus:ring-1 focus:ring-[#3b82f6] transition-colors [color-scheme:light]"
+                  className="w-full bg-zinc-800 border border-zinc-700 rounded-xl px-4 py-3 text-white placeholder:text-zinc-300 focus:outline-none focus:border-[#3b82f6] focus:ring-1 focus:ring-[#3b82f6] transition-colors [color-scheme:light]"
                 />
               </div>
 
@@ -263,7 +263,7 @@ const Signup = () => {
                 onChange={(e) => setAcceptedTerms(e.target.checked)}
                 className="w-4 h-4 rounded border-zinc-700 bg-zinc-800 text-[#3b82f6] focus:ring-[#3b82f6] focus:ring-1"
               />
-              <label htmlFor="terms" className="text-sm text-zinc-400">
+              <label htmlFor="terms" className="text-sm text-zinc-300">
                 I accept the{" "}
                 <button
                   type="button"
@@ -289,7 +289,7 @@ const Signup = () => {
         ) : (
           <form onSubmit={handleVerifyOtp} className="space-y-4">
             <div className="text-center mb-6">
-              <p className="text-zinc-400 text-sm">
+              <p className="text-zinc-300 text-sm">
                 We sent a verification code to{" "}
                 <span className="text-white font-semibold">{email}</span>
               </p>
@@ -322,14 +322,14 @@ const Signup = () => {
                 setError("");
               }}
               disabled={loading}
-              className="w-full bg-transparent hover:bg-zinc-700 text-zinc-400 font-medium py-3 rounded-xl transition-colors mt-2"
+              className="w-full bg-transparent hover:bg-zinc-700 text-zinc-300 font-medium py-3 rounded-xl transition-colors mt-2"
             >
               Back to Details
             </button>
           </form>
         )}
 
-        <div className="mt-8 text-center text-sm text-zinc-400">
+        <div className="mt-8 text-center text-sm text-zinc-300">
           Already have an account?{" "}
           <Link
             to="/login"

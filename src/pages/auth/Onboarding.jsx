@@ -72,7 +72,7 @@ export default function Onboarding() {
           <h1 className="text-3xl font-bold bg-gradient-to-r from-[#3b82f6] to-blue-600 bg-clip-text text-transparent mb-2">
             Almost There!
           </h1>
-          <p className="text-zinc-400">
+          <p className="text-zinc-300">
             Tell CuraAi about your health profile so we can provide better
             insights.
           </p>
@@ -82,7 +82,7 @@ export default function Onboarding() {
           <div className="grid grid-cols-2 gap-4">
             {/* Height */}
             <div className="relative">
-              <label className="block text-xs font-medium text-zinc-400 mb-1">
+              <label className="block text-xs font-medium text-zinc-300 mb-1">
                 Height (cm)
               </label>
               <div className="relative">
@@ -95,7 +95,7 @@ export default function Onboarding() {
                   className="w-full bg-zinc-800 border border-zinc-700 rounded-xl px-4 py-3 pl-11 text-white placeholder:text-zinc-500 focus:outline-none focus:border-[#3b82f6] focus:ring-1 focus:ring-[#3b82f6] transition-colors"
                 />
                 <Activity
-                  className="absolute left-4 top-3.5 text-zinc-400"
+                  className="absolute left-4 top-3.5 text-zinc-300"
                   size={18}
                 />
               </div>
@@ -103,7 +103,7 @@ export default function Onboarding() {
 
             {/* Weight */}
             <div className="relative">
-              <label className="block text-xs font-medium text-zinc-400 mb-1">
+              <label className="block text-xs font-medium text-zinc-300 mb-1">
                 Weight (kg)
               </label>
               <div className="relative">
@@ -116,7 +116,7 @@ export default function Onboarding() {
                   className="w-full bg-zinc-800 border border-zinc-700 rounded-xl px-4 py-3 pl-11 text-white placeholder:text-zinc-500 focus:outline-none focus:border-[#3b82f6] focus:ring-1 focus:ring-[#3b82f6] transition-colors"
                 />
                 <Activity
-                  className="absolute left-4 top-3.5 text-zinc-400"
+                  className="absolute left-4 top-3.5 text-zinc-300"
                   size={18}
                 />
               </div>
@@ -125,7 +125,7 @@ export default function Onboarding() {
 
           {/* Blood Group */}
           <div className="relative">
-            <label className="block text-xs font-medium text-zinc-400 mb-1">
+            <label className="block text-xs font-medium text-zinc-300 mb-1">
               Blood Group
             </label>
             <div className="relative">
@@ -147,7 +147,7 @@ export default function Onboarding() {
                 )}
               </select>
               <Droplet
-                className="absolute left-4 top-3.5 text-zinc-400"
+                className="absolute left-4 top-3.5 text-zinc-300"
                 size={18}
               />
             </div>
@@ -155,7 +155,7 @@ export default function Onboarding() {
 
           {/* Chronic Conditions */}
           <div className="relative">
-            <label className="block text-xs font-medium text-zinc-400 mb-1">
+            <label className="block text-xs font-medium text-zinc-300 mb-1">
               Chronic Conditions (comma separated)
             </label>
             <div className="relative">
@@ -168,7 +168,7 @@ export default function Onboarding() {
                 className="w-full bg-zinc-800 border border-zinc-700 rounded-xl px-4 py-3 pl-11 text-white placeholder:text-zinc-500 focus:outline-none focus:border-[#3b82f6] focus:ring-1 focus:ring-[#3b82f6] transition-colors"
               />
               <AlertCircle
-                className="absolute left-4 top-3.5 text-zinc-400"
+                className="absolute left-4 top-3.5 text-zinc-300"
                 size={18}
               />
             </div>
@@ -176,7 +176,7 @@ export default function Onboarding() {
 
           {/* Allergies */}
           <div className="relative">
-            <label className="block text-xs font-medium text-zinc-400 mb-1">
+            <label className="block text-xs font-medium text-zinc-300 mb-1">
               Allergies (comma separated)
             </label>
             <div className="relative">
@@ -189,7 +189,7 @@ export default function Onboarding() {
                 className="w-full bg-zinc-800 border border-zinc-700 rounded-xl px-4 py-3 pl-11 text-white placeholder:text-zinc-500 focus:outline-none focus:border-[#3b82f6] focus:ring-1 focus:ring-[#3b82f6] transition-colors"
               />
               <AlertCircle
-                className="absolute left-4 top-3.5 text-zinc-400"
+                className="absolute left-4 top-3.5 text-zinc-300"
                 size={18}
               />
             </div>

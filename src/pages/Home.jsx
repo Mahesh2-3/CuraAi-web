@@ -287,7 +287,7 @@ export default function Home() {
           <button
             type="submit"
             disabled={!userMsg.trim()}
-            className="flex-shrink-0 bg-[#3b82f6] hover:bg-blue-600 disabled:bg-zinc-200 disabled:text-zinc-400 text-white p-3.5 rounded-2xl transition-colors shadow-sm disabled:cursor-not-allowed"
+            className="flex-shrink-0 bg-[#3b82f6] hover:bg-blue-600 disabled:bg-zinc-200 disabled:text-zinc-300 text-white p-3.5 rounded-2xl transition-colors shadow-sm disabled:cursor-not-allowed"
           >
             <Send
               size={20}
@@ -297,7 +297,7 @@ export default function Home() {
             />
           </button>
         </form>
-        <p className="text-center sm:text-xs text-[10px] text-zinc-400 mt-2">
+        <p className="text-center sm:text-xs text-[10px] text-zinc-300 mt-2">
           CuraAi can make mistakes. Consider verifying medical advice with a
           professional.
         </p>

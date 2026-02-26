@@ -159,7 +159,7 @@ export default function CareNearBy() {
               Care Nearby
             </h1>
           </div>
-          <p className="text-zinc-400 mt-2">
+          <p className="text-zinc-300 mt-2">
             Find hospitals and clinics within your vicinity.
           </p>
         </div>
@@ -218,8 +218,8 @@ export default function CareNearBy() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 pb-12">
           {hospitals.length === 0 && !error && userLocation ? (
             <div className="col-span-full py-12 text-center border border-dashed border-zinc-700 bg-zinc-800 rounded-2xl shadow-sm">
-              <MapPin size={48} className="mx-auto text-zinc-400 mb-4" />
-              <p className="text-zinc-400 text-lg">
+              <MapPin size={48} className="mx-auto text-zinc-300 mb-4" />
+              <p className="text-zinc-300 text-lg">
                 No hospitals found within {radiusKm}km.
               </p>
               <p className="text-zinc-500 text-sm mt-1">
@@ -250,7 +250,7 @@ export default function CareNearBy() {
                   </p>
 
                   {item.tags?.["addr:postcode"] && (
-                    <p className="text-zinc-400 text-xs mt-0.5">
+                    <p className="text-zinc-300 text-xs mt-0.5">
                       PIN: {item.tags?.["addr:postcode"]}
                     </p>
                   )}
