@@ -168,7 +168,7 @@ export default function Home() {
       ),
       {
         role: "assistant",
-        content: "ai is typing....",
+        content: "Ai is typing....",
         status: "loading",
         createdAt: serverTimestamp(),
       },
@@ -176,7 +176,8 @@ export default function Home() {
 
     await setDoc(convoRef, { updatedAt: serverTimestamp() }, { merge: true });
 
-    const ipAddress = import.meta.env.IP_ADDRESS;
+    const ipAddress = import.meta.env.VITE_SERVER_URL;
+    console.log(ipAddress);
 
     // Trigger AI
     fetch(`${ipAddress}/ai-response`, {
@@ -193,7 +194,7 @@ export default function Home() {
 
   async function handleAnalysis() {
     try {
-      const ipAddress = import.meta.env.IP_ADDRESS;
+      const ipAddress = import.meta.env.VITE_SERVER_URL;
       fetch(`${ipAddress}/analysis`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -237,7 +238,7 @@ export default function Home() {
             <div
               className={`px-5 py-3.5 mt-1 text-[15px] leading-relaxed shadow-sm ${
                 item.role === "user"
-                  ? "bg-[#3b82f6] text-white rounded-2xl rounded-tr-sm max-w-[85%] md:max-w-[75%]"
+                  ? "bg-[#1856b9] text-white rounded-2xl rounded-tr-sm max-w-[85%] md:max-w-[75%]"
                   : "text-zinc-100 rounded-2xl rounded-tl-sm max-w-[95%] md:max-w-[85%]"
               }`}
             >

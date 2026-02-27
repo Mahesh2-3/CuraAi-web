@@ -102,7 +102,7 @@ export default function Diseases() {
 
     try {
       setSubmitting(true);
-      const ipAddress = import.meta.env.IP_ADDRESS;
+      const ipAddress = import.meta.env.VITE_SERVER_URL;
 
       const res = await fetch(`${ipAddress}/add-disease`, {
         method: "POST",

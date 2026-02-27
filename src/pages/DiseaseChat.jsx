@@ -115,7 +115,7 @@ export default function DiseaseChat() {
         createdAt: serverTimestamp(),
       });
 
-      const ipAddress = import.meta.env.IP_ADDRESS;
+      const ipAddress = import.meta.env.VITE_SERVER_URL;
 
       // Trigger AI
       fetch(`${ipAddress}/disease-chat`, {

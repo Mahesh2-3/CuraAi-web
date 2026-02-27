@@ -182,7 +182,7 @@ export default function Layout() {
         <div className="flex items-center justify-between mb-6">
           <div className="flex items-center gap-3 w-full">
             <img
-              src={"/images/logo.webp"}
+              src={"/images/logo.png"}
               alt="logo"
               className="w-10 h-10 rounded-full border border-zinc-600 object-cover hover:opacity-80 transition-opacity"
             />

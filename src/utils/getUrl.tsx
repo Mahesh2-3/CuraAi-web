@@ -1,7 +1,7 @@
 const getUrl = async (publicId: string, resourceType: string) => {
 
 
-    const ipAddress = import.meta.env.IP_ADDRESS;
+    const ipAddress = import.meta.env.VITE_SERVER_URL;
     const endpoint = `${ipAddress}/sign-cloudinary`;
 
     const res = await fetch(endpoint, {
