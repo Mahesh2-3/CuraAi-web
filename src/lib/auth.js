@@ -126,7 +126,7 @@ export async function saveUserData(uid, email, profileData) {
 export async function CreateDefaultSettings() {
   try {
     // using import.meta.env for Vite instead of process.env setup
-    const ipAddress = import.meta.env.VITE_PUBLIC_IP_ADDRESS;
+    const ipAddress = import.meta.env.IP_ADDRESS;
     const res = await fetch(`${ipAddress}/create-default-settings`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -135,7 +135,5 @@ export async function CreateDefaultSettings() {
       }),
     });
     return res;
-  } catch (error) {
-    console.log(error);
-  }
+  } catch (error) {}
 }

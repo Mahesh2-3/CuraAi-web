@@ -1,11 +1,8 @@
 const getUrl = async (publicId: string, resourceType: string) => {
-    console.log("🔗 [getUrl] Requesting signed URL");
-    console.log("📦 publicId:", publicId);
-    console.log("📁 resourceType:", resourceType);
 
-    const ipAddress = import.meta.env.VITE_PUBLIC_IP_ADDRESS;
+
+    const ipAddress = import.meta.env.IP_ADDRESS;
     const endpoint = `${ipAddress}/sign-cloudinary`;
-    console.log("🌐 Endpoint:", endpoint);
 
     const res = await fetch(endpoint, {
         method: "POST",
@@ -16,7 +13,6 @@ const getUrl = async (publicId: string, resourceType: string) => {
         }),
     });
 
-    console.log("📡 Response status:", res.status);
 
     if (!res.ok) {
         const text = await res.text();
@@ -25,7 +21,6 @@ const getUrl = async (publicId: string, resourceType: string) => {
     }
 
     const data = await res.json();
-    console.log("✅ Signed URL received:", data);
 
     return data.url;
 }

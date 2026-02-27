@@ -86,9 +86,7 @@ export default function CareNearBy() {
           setHospitals(results);
           success = true;
           break;
-        } catch (err) {
-          console.log("Overpass API fallback...", err);
-        }
+        } catch (err) {}
       }
 
       if (!success) {

@@ -58,7 +58,6 @@ export default function Layout() {
 
   useEffect(() => {
     if (!user) return;
-    console.log(user);
     const q = query(
       collection(db, "users", user.uid, "conversations"),
       orderBy("updatedAt", "desc"),
@@ -205,7 +204,6 @@ export default function Layout() {
           <div className="space-y-1 shrink-0">
             {sidebarOptions.map((item) => {
               const isActive = location.pathname === item.link;
-              console.log(location.pathname, item.link);
               const Icon = item.icon;
 
               return (

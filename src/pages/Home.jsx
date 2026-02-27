@@ -65,7 +65,6 @@ export default function Home() {
         attachment: doc.data().attachment,
       }));
       setMessages(msgs);
-      console.log(msgs);
       setTimeout(scrollToBottom, 100);
     });
 
@@ -177,7 +176,7 @@ export default function Home() {
 
     await setDoc(convoRef, { updatedAt: serverTimestamp() }, { merge: true });
 
-    const ipAddress = import.meta.env.VITE_PUBLIC_IP_ADDRESS;
+    const ipAddress = import.meta.env.IP_ADDRESS;
 
     // Trigger AI
     fetch(`${ipAddress}/ai-response`, {
@@ -194,7 +193,7 @@ export default function Home() {
 
   async function handleAnalysis() {
     try {
-      const ipAddress = import.meta.env.VITE_PUBLIC_IP_ADDRESS;
+      const ipAddress = import.meta.env.IP_ADDRESS;
       fetch(`${ipAddress}/analysis`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -203,8 +202,6 @@ export default function Home() {
           conversationId: activeConversationId,
         }),
       });
-    } catch (error) {
-      console.log(error.message);
     }
   }
 

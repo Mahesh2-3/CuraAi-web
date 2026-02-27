@@ -11,7 +11,6 @@ export default function ReportProblem() {
   const handleSubmit = (e) => {
     e.preventDefault();
     // Here you would typically send the report to a backend/Firebase
-    console.log("Reporting problem:", { issue, details });
     setSubmitted(true);
   };
 

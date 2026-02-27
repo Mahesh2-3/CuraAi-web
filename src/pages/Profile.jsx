@@ -29,7 +29,6 @@ export default function Profile() {
   useEffect(() => {
     if (!user) return;
     const unsubscribe = onSnapshot(doc(db, "users", user.uid), (doc) => {
-      console.log(doc.data());
       setUserData(doc.data());
     });
     return unsubscribe;
