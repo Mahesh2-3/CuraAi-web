@@ -48,9 +48,7 @@ export default function DiseaseChat() {
         } else {
           setDiseaseTitle("Chat");
         }
-      } catch (error) {
-        console.error("Error fetching disease info:", error);
-      }
+      } catch (error) {}
     }
     fetchDiseaseInfo();
   }, [id, user]);
@@ -127,7 +125,6 @@ export default function DiseaseChat() {
         }),
       });
     } catch (err) {
-      console.error("SEND ERROR:", err);
     } finally {
       setSending(false);
     }

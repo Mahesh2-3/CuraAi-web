@@ -16,7 +16,7 @@ const getUrl = async (publicId: string, resourceType: string) => {
 
     if (!res.ok) {
         const text = await res.text();
-        console.error("❌ Signed URL request failed:", text);
+
         throw new Error("Failed to fetch signed URL");
     }
 

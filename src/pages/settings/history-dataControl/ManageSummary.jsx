@@ -41,9 +41,7 @@ export default function ManageSummary() {
         if (snap.exists() && snap.data().summary?.mode) {
           setMode(snap.data().summary.mode);
         }
-      } catch (err) {
-        console.error("Failed to load summary preferences", err);
-      }
+      } catch (err) {}
     };
 
     const loadSummaries = async () => {
@@ -73,9 +71,7 @@ export default function ManageSummary() {
         await updateDoc(doc(db, "users", user.uid, "settings", "preferences"), {
           "summary.mode": mode,
         });
-      } catch (err) {
-        console.error("Failed to update summary mode preference", err);
-      }
+      } catch (err) {}
     };
     updateMode();
   }, [mode, user]);
@@ -98,7 +94,6 @@ export default function ManageSummary() {
             return copy;
           });
         } catch (err) {
-          console.error("Error deleting summary:", err);
           setModalState({
             isOpen: true,
             title: "Error",

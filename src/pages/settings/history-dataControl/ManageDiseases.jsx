@@ -66,7 +66,6 @@ export default function ManageDiseases() {
           batch.delete(doc(db, "users", user.uid, "diseases", diseaseId));
           await batch.commit();
         } catch (err) {
-          console.error("Error deleting disease:", err);
           setModalState({
             isOpen: true,
             title: "Error",
@@ -107,7 +106,6 @@ export default function ManageDiseases() {
             onConfirm: null,
           });
         } catch (err) {
-          console.error("Error clearing chat:", err);
           setModalState({
             isOpen: true,
             title: "Error",
@@ -144,7 +142,6 @@ export default function ManageDiseases() {
           }
           await batch.commit();
         } catch (err) {
-          console.error("Error clearing all diseases:", err);
           setModalState({
             isOpen: true,
             title: "Error",

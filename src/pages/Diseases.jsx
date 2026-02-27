@@ -58,7 +58,6 @@ export default function Diseases() {
         setLoading(false);
       },
       (error) => {
-        console.error("FETCH DISEASES ERROR:", error);
         setModalState({
           isOpen: true,
           title: "Error",
@@ -138,7 +137,6 @@ export default function Diseases() {
         type: "danger",
         isAlert: true,
       });
-      console.error(err.message);
     } finally {
       setSubmitting(false);
     }

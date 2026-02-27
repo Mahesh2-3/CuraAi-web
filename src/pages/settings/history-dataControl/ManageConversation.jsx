@@ -71,7 +71,6 @@ export default function ManageConversation() {
 
           await batch.commit();
         } catch (err) {
-          console.error("Error deleting conversation:", err);
           setModalState({
             isOpen: true,
             title: "Error",
@@ -116,7 +115,6 @@ export default function ManageConversation() {
 
           await batch.commit();
         } catch (err) {
-          console.error("Error clearing all conversations:", err);
           setModalState({
             isOpen: true,
             title: "Error",

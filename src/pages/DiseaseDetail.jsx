@@ -48,7 +48,6 @@ export default function DiseaseDetail() {
           setDiseaseData(snapshot.data());
         }
       } catch (err) {
-        console.error("Failed to fetch disease:", err);
       } finally {
         setLoading(false);
       }

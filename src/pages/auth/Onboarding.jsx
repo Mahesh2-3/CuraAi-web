@@ -55,7 +55,6 @@ export default function Onboarding() {
       await refreshProfile();
       navigate("/");
     } catch (error) {
-      console.error("Failed to update onboarding profile", error);
     } finally {
       setLoading(false);
     }

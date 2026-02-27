@@ -42,9 +42,7 @@ export default function Permissions() {
             location: geoStatus.state === "granted",
           });
         }
-      } catch (err) {
-        console.warn("Permissions API not fully supported or blocked", err);
-      }
+      } catch (err) {}
     }
     checkPermissions();
   }, []);

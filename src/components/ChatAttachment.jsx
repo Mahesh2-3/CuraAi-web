@@ -5,7 +5,6 @@ export default function ChatAttachment({ attachment }) {
   const url = attachment.secureUrl;
 
   if (!url) {
-    console.warn("⚠️ No URL available in attachment");
     return null;
   }
 

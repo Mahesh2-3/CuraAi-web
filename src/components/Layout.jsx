@@ -114,7 +114,6 @@ export default function Layout() {
         doc(db, "users", user.uid, "conversations", chatToDelete),
       );
     } catch (error) {
-      console.error("Error deleting chat:", error);
     } finally {
       setChatToDelete(null);
       setIsConfirmModalOpen(false);

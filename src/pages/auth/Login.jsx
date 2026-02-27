@@ -59,7 +59,6 @@ const Login = () => {
 
       navigate("/");
     } catch (err) {
-      console.error("Sign in error:", err);
       // Simplify error mapping
       switch (err.message) {
         case "Firebase: Error (auth/user-not-found).":

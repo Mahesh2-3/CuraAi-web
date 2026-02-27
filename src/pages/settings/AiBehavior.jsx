@@ -46,7 +46,6 @@ export default function AiBehavior() {
       await updateDoc(ref, { aiBehavior });
       setOriginalBehavior(aiBehavior);
     } catch (err) {
-      console.error("Failed to save AI behavior:", err);
       // Fallback if document doesn't exist might need setDoc with merge, but updateDoc should work if initialized
     } finally {
       setSaving(false);

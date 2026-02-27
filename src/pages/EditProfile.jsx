@@ -166,7 +166,6 @@ export default function EditProfile() {
       await refreshProfile();
       navigate("/profile");
     } catch (err) {
-      console.error(err);
       setModalState({
         isOpen: true,
         title: "Error",

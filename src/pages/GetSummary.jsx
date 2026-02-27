@@ -75,7 +75,6 @@ export default function GetSummary() {
         "⏳ **Summary is being generated. Please check again shortly.**",
       );
     } catch (error) {
-      console.error(error);
       setMarkdown("❌ **Failed to load summary**");
     } finally {
       setLoading(false);

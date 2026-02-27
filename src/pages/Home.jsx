@@ -177,7 +177,6 @@ export default function Home() {
     await setDoc(convoRef, { updatedAt: serverTimestamp() }, { merge: true });
 
     const ipAddress = import.meta.env.VITE_SERVER_URL;
-    console.log(ipAddress);
 
     // Trigger AI
     fetch(`${ipAddress}/ai-response`, {

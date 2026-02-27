@@ -66,7 +66,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
                 await storage.set("user_settings", data);
             }
         } catch (err) {
-            console.error("Settings fetch error:", err);
+
         }
     };
 
@@ -85,7 +85,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
                 setProfile(null); // edge case: function not run yet
             }
         } catch (err) {
-            console.error("Profile fetch error:", err);
+
             setProfile(null);
         }
     };

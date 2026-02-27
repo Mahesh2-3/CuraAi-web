@@ -4,6 +4,6 @@ export async function openPrivateFile(url: string, filename: string) {
         // we simply open the signed URL in a new browser tab.
         window.open(url, "_blank");
     } catch (err) {
-        console.error("❌ Failed to open file", err);
+
     }
 }

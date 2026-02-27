@@ -111,7 +111,6 @@ const Signup = () => {
       // Redirect on success to Onboarding
       navigate("/onboarding");
     } catch (err) {
-      console.error(err);
       setError(err.message || "Registration failed");
     } finally {
       setLoading(false);
