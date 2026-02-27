@@ -52,8 +52,7 @@ const Signup = () => {
     setLoading(true);
 
     try {
-      const ipAddress =
-        import.meta.env.VITE_PUBLIC_IP_ADDRESS || "http://localhost:5000";
+      const ipAddress = import.meta.env.VITE_PUBLIC_IP_ADDRESS;
       const response = await fetch(`${ipAddress}/auth/send-otp`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -78,8 +77,7 @@ const Signup = () => {
     setLoading(true);
 
     try {
-      const ipAddress =
-        import.meta.env.VITE_PUBLIC_IP_ADDRESS || "http://localhost:5000";
+      const ipAddress = import.meta.env.VITE_PUBLIC_IP_ADDRESS;
       const response = await fetch(`${ipAddress}/auth/verify-otp`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },

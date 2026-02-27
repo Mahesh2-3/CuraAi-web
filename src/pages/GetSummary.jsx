@@ -50,8 +50,7 @@ export default function GetSummary() {
       }
 
       // No summary or forced regeneration → trigger backend
-      const ipAddress =
-        import.meta.env.VITE_PUBLIC_IP_ADDRESS || "localhost:3000";
+      const ipAddress = import.meta.env.VITE_PUBLIC_IP_ADDRESS;
       await fetch(`${ipAddress}/get-summary`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },

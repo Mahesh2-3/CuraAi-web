@@ -3,7 +3,7 @@ const getUrl = async (publicId: string, resourceType: string) => {
     console.log("📦 publicId:", publicId);
     console.log("📁 resourceType:", resourceType);
 
-    const ipAddress = import.meta.env.VITE_PUBLIC_IP_ADDRESS || "localhost:3000";
+    const ipAddress = import.meta.env.VITE_PUBLIC_IP_ADDRESS;
     const endpoint = `${ipAddress}/sign-cloudinary`;
     console.log("🌐 Endpoint:", endpoint);
 

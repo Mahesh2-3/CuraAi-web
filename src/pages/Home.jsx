@@ -177,8 +177,7 @@ export default function Home() {
 
     await setDoc(convoRef, { updatedAt: serverTimestamp() }, { merge: true });
 
-    const ipAddress =
-      import.meta.env.VITE_PUBLIC_IP_ADDRESS || "http://localhost:5000";
+    const ipAddress = import.meta.env.VITE_PUBLIC_IP_ADDRESS;
 
     // Trigger AI
     fetch(`${ipAddress}/ai-response`, {
@@ -195,8 +194,7 @@ export default function Home() {
 
   async function handleAnalysis() {
     try {
-      const ipAddress =
-        import.meta.env.VITE_PUBLIC_IP_ADDRESS || "http://localhost:5000";
+      const ipAddress = import.meta.env.VITE_PUBLIC_IP_ADDRESS;
       fetch(`${ipAddress}/analysis`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
