@@ -202,7 +202,7 @@ export default function Home() {
           conversationId: activeConversationId,
         }),
       });
-    }
+    } catch (err) {}
   }
 
   return (
