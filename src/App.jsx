@@ -8,6 +8,7 @@ import Layout from "./components/Layout";
 const Login = lazy(() => import("./pages/auth/Login"));
 const Signup = lazy(() => import("./pages/auth/Signup"));
 const Onboarding = lazy(() => import("./pages/auth/Onboarding"));
+const ForgotPassword = lazy(() => import("./pages/auth/ForgotPassword"));
 
 const Home = lazy(() => import("./pages/Home"));
 const Diseases = lazy(() => import("./pages/Diseases"));
@@ -61,6 +62,7 @@ function App() {
               <Route path="/login" element={<Login />} />
               <Route path="/signup" element={<Signup />} />
               <Route path="/onboarding" element={<Onboarding />} />
+              <Route path="/forgot-password" element={<ForgotPassword />} />
 
               <Route element={<Layout />}>
                 <Route path="/" element={<Home />} />

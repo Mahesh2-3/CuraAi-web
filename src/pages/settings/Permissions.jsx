@@ -21,8 +21,6 @@ export default function Permissions() {
     setModalState((prev) => ({ ...prev, isOpen: false }));
 
   useEffect(() => {
-    // Mocking permissions check for web. In a real web app, we can use navigator.permissions API
-    // but browser permissions generally trigger on-demand when requested.
     async function checkPermissions() {
       try {
         if (navigator.permissions) {
@@ -47,16 +45,55 @@ export default function Permissions() {
     checkPermissions();
   }, []);
 
-  const handleToggle = (type) => {
-    // In browsers, you cannot programmatically revoke permissions.
-    // Instead, we just inform the user to use site settings.
-    setModalState({
-      isOpen: true,
-      title: "Permission Notice",
-      message: `Please use your browser's site settings (usually the lock icon next to the URL) to change ${type} permissions.`,
-      type: "info",
-      isAlert: true,
-    });
+  const handleToggle = async (type) => {
+    try {
+      if (type === "Camera") {
+        if (!permissions.camera) {
+          const stream = await navigator.mediaDevices.getUserMedia({
+            video: true,
+          });
+          stream.getTracks().forEach((track) => track.stop());
+          setPermissions((prev) => ({ ...prev, camera: true }));
+        } else {
+          setPermissions((prev) => ({ ...prev, camera: false }));
+        }
+      }
+
+      if (type === "Microphone") {
+        if (!permissions.microphone) {
+          const stream = await navigator.mediaDevices.getUserMedia({
+            audio: true,
+          });
+          stream.getTracks().forEach((track) => track.stop());
+          setPermissions((prev) => ({ ...prev, microphone: true }));
+        } else {
+          setPermissions((prev) => ({ ...prev, microphone: false }));
+        }
+      }
+
+      if (type === "Location") {
+        if (!permissions.location) {
+          navigator.geolocation.getCurrentPosition(
+            () => {
+              setPermissions((prev) => ({ ...prev, location: true }));
+            },
+            () => {
+              setPermissions((prev) => ({ ...prev, location: false }));
+            },
+          );
+        } else {
+          setPermissions((prev) => ({ ...prev, location: false }));
+        }
+      }
+    } catch (err) {
+      setModalState({
+        isOpen: true,
+        title: "Permission Denied",
+        message: `Unable to access ${type}. Please allow permission in browser settings.`,
+        type: "error",
+        isAlert: true,
+      });
+    }
   };
 
   return (

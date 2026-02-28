@@ -137,6 +137,12 @@ const Login = () => {
         </form>
 
         <div className="mt-8 text-center text-sm text-zinc-300">
+          <Link
+            to="/forgot-password"
+            className="text-[#3b82f6] hover:text-[#2563eb] font-medium block mb-3"
+          >
+            Forgot Password?
+          </Link>
           Don't have an account?{" "}
           <Link
             to="/signup"
