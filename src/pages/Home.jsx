@@ -191,22 +191,6 @@ export default function Home() {
         conversationId,
       }),
     });
-
-    handleAnalysis();
-  }
-
-  async function handleAnalysis() {
-    try {
-      const ipAddress = import.meta.env.VITE_SERVER_URL;
-      fetch(`${ipAddress}/analysis`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          userId: user?.uid,
-          conversationId: activeConversationId,
-        }),
-      });
-    } catch (err) {}
   }
 
   return (
