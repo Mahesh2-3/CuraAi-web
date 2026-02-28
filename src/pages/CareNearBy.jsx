@@ -145,19 +145,19 @@ export default function CareNearBy() {
   /* ---------------- UI ---------------- */
 
   return (
-    <div className="flex flex-col min-h-screen p-6 relative">
+    <div className="flex flex-col min-h-screen p-4 md:p-6 relative">
       {/* Header */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
         <div>
           <div className="flex items-center gap-3 mb-1">
-            <div className="w-10 h-10 bg-[#3b82f6]/10 rounded-xl flex items-center justify-center">
-              <MapPin className="text-[#3b82f6]" size={24} />
+            <div className="w-8 h-8 md:w-10 md:h-10 bg-[#3b82f6]/10 rounded-xl flex items-center justify-center shrink-0">
+              <MapPin className="text-[#3b82f6] w-5 h-5 md:w-6 md:h-6" />
             </div>
-            <h1 className="text-3xl font-bold bg-gradient-to-r from-[#3b82f6] to-blue-600 bg-clip-text text-transparent">
+            <h1 className="text-xl md:text-2xl font-bold bg-gradient-to-r from-[#3b82f6] to-blue-600 bg-clip-text text-transparent">
               Care Nearby
             </h1>
           </div>
-          <p className="text-zinc-300 mt-2">
+          <p className="text-zinc-300 mt-2 text-sm md:text-base max-md:text-xs">
             Find hospitals and clinics within your vicinity.
           </p>
         </div>
@@ -166,7 +166,7 @@ export default function CareNearBy() {
         <div className="flex flex-wrap gap-3">
           <button
             onClick={() => setRadiusKm((prev) => (prev >= 20 ? 5 : prev + 5))}
-            className="flex items-center gap-2 bg-zinc-800 hover:bg-zinc-800 border border-zinc-700 px-4 py-2.5 rounded-xl transition-colors shrink-0 shadow-sm"
+            className="flex items-center gap-2 bg-zinc-800 hover:bg-zinc-800 border border-zinc-700 px-4 py-2.5 rounded-xl transition-colors shrink-0 shadow-sm max-md:text-sm"
           >
             <Search size={18} className="text-[#3b82f6]" />
             <span className="text-white font-medium whitespace-nowrap">
@@ -178,7 +178,7 @@ export default function CareNearBy() {
             onClick={() =>
               setSortOrder((prev) => (prev === "asc" ? "desc" : "asc"))
             }
-            className="flex items-center gap-2 bg-zinc-800 hover:bg-zinc-800 border border-zinc-700 px-4 py-2.5 rounded-xl transition-colors shrink-0 shadow-sm"
+            className="flex items-center gap-2 bg-zinc-800 hover:bg-zinc-800 border border-zinc-700 px-4 py-2.5 rounded-xl transition-colors shrink-0 shadow-sm max-md:text-sm"
           >
             <Navigation size={18} className="text-blue-500" />
             <span className="text-white font-medium whitespace-nowrap">
@@ -216,7 +216,7 @@ export default function CareNearBy() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 pb-12">
           {hospitals.length === 0 && !error && userLocation ? (
             <div className="col-span-full py-12 text-center border border-dashed border-zinc-700 bg-zinc-800 rounded-2xl shadow-sm">
-              <MapPin size={48} className="mx-auto text-zinc-300 mb-4" />
+              <MapPin className="md:size-12 size-8 mx-auto text-zinc-300 mb-4" />
               <p className="text-zinc-300 text-lg">
                 No hospitals found within {radiusKm}km.
               </p>
@@ -231,12 +231,12 @@ export default function CareNearBy() {
                 onClick={() => openInMaps(item)}
                 className="group bg-zinc-800 border border-zinc-700 hover:border-[#3b82f6]/50 rounded-2xl p-5 cursor-pointer transition-all hover:-translate-y-1 hover:shadow-xl hover:shadow-[#3b82f6]/10 flex items-start gap-4 shadow-sm"
               >
-                <div className="w-12 h-12 shrink-0 bg-[#3b82f6]/10 rounded-xl flex items-center justify-center group-hover:bg-[#3b82f6]/20 transition-colors">
-                  <MapPin size={24} className="text-[#3b82f6]" />
+                <div className="md:w-12 md:h-12 w-8 h-8 shrink-0 bg-[#3b82f6]/10 rounded-xl flex items-center justify-center group-hover:bg-[#3b82f6]/20 transition-colors">
+                  <MapPin className="text-[#3b82f6] md:size-6 size-4" />
                 </div>
 
                 <div className="flex-1 min-w-0">
-                  <h3 className="font-bold text-white text-lg truncate group-hover:text-[#3b82f6] transition-colors">
+                  <h3 className="font-bold text-white md:text-lg text-sm truncate group-hover:text-[#3b82f6] transition-colors">
                     {item.tags?.name || "Unnamed Hospital"}
                   </h3>
 
@@ -266,7 +266,7 @@ export default function CareNearBy() {
       )}
 
       {/* FOOTER DISCLAIMER */}
-      <div className="mt-8 pt-4 border-t border-zinc-700 text-center">
+      <div className="mt-8 py-4 border-t border-zinc-700 text-center">
         <p className="text-xs text-zinc-500">
           Distance shown is straight-line (air) distance, not the actual travel
           route. Open directions in Google Maps for accurate routing.

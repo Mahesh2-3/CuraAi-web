@@ -104,12 +104,12 @@ export default function GetSummary() {
               Health Summary
             </h1>
           </div>
-          <p className="text-zinc-300 mt-2">
+          <p className="text-zinc-300 mt-2 max-md:text-xs">
             AI-generated summary of your recent conditions.
           </p>
         </div>
 
-        <div className="flex items-center gap-4 bg-zinc-800 border border-zinc-700 p-1.5 rounded-full shadow-sm">
+        <div className="flex items-center justify-center gap-4 bg-zinc-800 border border-zinc-700 p-1.5 rounded-full shadow-sm">
           <div className="flex gap-1">
             {TABS.map((tab) => {
               const isActive = activeTab === tab.value;
@@ -117,7 +117,7 @@ export default function GetSummary() {
                 <button
                   key={tab.value}
                   onClick={() => setActiveTab(tab.value)}
-                  className={`px-6 py-2 rounded-full text-sm font-semibold transition-all shadow-sm ${
+                  className={`md:px-6 px-4 py-2 rounded-full text-sm font-semibold transition-all shadow-sm ${
                     isActive
                       ? "bg-[#3b82f6] text-white shadow-[#3b82f6]/20"
                       : "text-zinc-300 hover:text-white hover:bg-zinc-700"
@@ -142,7 +142,7 @@ export default function GetSummary() {
       </div>
 
       {/* Content Area */}
-      <div className="flex-1 max-w-5xl w-full mx-auto p-6 sm:p-8 overflow-y-auto shadow-sm">
+      <div className="flex-1 max-w-5xl w-full mx-auto md:p-6 sm:p-8 overflow-y-auto shadow-sm">
         {loading && !markdown ? (
           <div className="flex flex-col items-center justify-center h-full">
             <div className="w-12 h-12 border-4 border-[#3b82f6]/30 border-t-[#3b82f6] rounded-full animate-spin mb-4"></div>

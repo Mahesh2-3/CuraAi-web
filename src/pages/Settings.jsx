@@ -134,20 +134,22 @@ export default function Settings() {
     .filter((section) => section.items.length > 0);
 
   return (
-    <div className="flex flex-col h-full bg-zinc-900 p-6 lg:p-10 overflow-y-auto">
+    <div className="flex flex-col h-full bg-zinc-900 p-4 md:p-6 lg:p-10 overflow-y-auto">
       <div className="max-w-5xl w-full mx-auto">
-        <div className="flex items-center gap-4 mb-8">
+        <div className="flex items-center gap-3 md:gap-4 mb-8">
           <Link
             to="/profile"
-            className="w-10 h-10 bg-zinc-800 border border-zinc-700 rounded-xl flex items-center justify-center hover:bg-zinc-800 transition-colors shadow-sm"
+            className="w-8 h-8 md:w-10 md:h-10 bg-zinc-800 border border-zinc-700 rounded-xl flex items-center justify-center hover:bg-zinc-800 transition-colors shadow-sm shrink-0"
           >
-            <ArrowLeft className="text-zinc-300" size={20} />
+            <ArrowLeft className="text-zinc-300 w-4 h-4 md:w-5 md:h-5" />
           </Link>
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 bg-[#3b82f6]/10 rounded-xl flex items-center justify-center">
-              <SettingsIcon className="text-[#3b82f6]" size={24} />
+          <div className="flex items-center gap-2 md:gap-3">
+            <div className="w-8 h-8 md:w-10 md:h-10 bg-[#3b82f6]/10 rounded-xl flex items-center justify-center shrink-0">
+              <SettingsIcon className="text-[#3b82f6] w-5 h-5 md:w-6 md:h-6" />
             </div>
-            <h1 className="text-2xl font-bold text-white">Settings</h1>
+            <h1 className="text-xl md:text-2xl font-bold text-white">
+              Settings
+            </h1>
           </div>
         </div>
 

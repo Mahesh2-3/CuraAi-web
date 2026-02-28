@@ -35,15 +35,19 @@ export default function Profile() {
   }, [user]);
 
   return (
-    <div className="flex flex-col h-full bg-zinc-900 p-6 lg:p-10 overflow-y-auto w-full">
+    <div className="flex flex-col h-full bg-zinc-900 p-4 md:p-6 lg:p-10 overflow-y-auto w-full">
       <div className="max-w-3xl w-full mx-auto">
-        <div className="flex items-center gap-4 mb-8">
-          <div className="w-12 h-12 bg-[#3b82f6]/10 rounded-xl flex items-center justify-center">
-            <User className="text-[#3b82f6]" size={28} />
+        <div className="flex items-center gap-3 md:gap-4 mb-8">
+          <div className="w-10 h-10 md:w-12 md:h-12 bg-[#3b82f6]/10 rounded-xl flex items-center justify-center shrink-0">
+            <User className="text-[#3b82f6] w-6 h-6 md:w-7 md:h-7" />
           </div>
           <div>
-            <h1 className="text-3xl font-bold text-white">Profile</h1>
-            <p className="text-zinc-300">Manage your account and preferences</p>
+            <h1 className="text-xl md:text-3xl font-bold text-white">
+              Profile
+            </h1>
+            <p className="text-zinc-300 text-sm md:text-base">
+              Manage your account and preferences
+            </p>
           </div>
         </div>
 

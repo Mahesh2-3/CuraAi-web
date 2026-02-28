@@ -144,24 +144,24 @@ export default function DiseaseDetail() {
   };
 
   return (
-    <div className="flex flex-col h-full bg-zinc-900 p-6 lg:p-10 overflow-y-auto w-full">
+    <div className="flex flex-col h-full bg-zinc-900 p-4 md:p-6 overflow-y-auto w-full">
       <div className="max-w-5xl w-full mx-auto">
-        <div className="flex items-center gap-4 mb-8">
+        <div className="flex items-center gap-3 md:gap-4 mb-8">
           <Link
             to="/diseases"
-            className="w-10 h-10 bg-zinc-800 border border-zinc-700 rounded-xl flex items-center justify-center hover:bg-zinc-700 transition-colors shadow-sm shrink-0"
+            className="w-8 h-8 md:w-10 md:h-10 bg-zinc-800 border border-zinc-700 rounded-xl flex items-center justify-center hover:bg-zinc-700 transition-colors shadow-sm shrink-0"
           >
-            <ArrowLeft className="text-zinc-300" size={20} />
+            <ArrowLeft className="text-zinc-300 w-4 h-4 md:w-5 md:h-5" />
           </Link>
           <div className="flex-1 flex items-center justify-between min-w-0">
-            <h1 className="text-3xl font-bold text-white truncate pr-4">
+            <h1 className="text-lg md:text-2xl font-bold text-white truncate pr-2 md:pr-4">
               {diseaseData.diseaseName}
             </h1>
             <button
               onClick={() => navigate(`/diseases/${id}/chat`)}
-              className="bg-[#3b82f6]/10 text-[#3b82f6] hover:bg-[#3b82f6]/20 px-4 py-2 rounded-xl transition-colors font-medium flex items-center gap-2 shrink-0 border border-[#3b82f6]/20"
+              className="bg-[#3b82f6]/10 text-[#3b82f6] hover:bg-[#3b82f6]/20 px-3 py-1.5 md:px-4 md:py-2 rounded-xl transition-colors text-sm md:text-base font-medium flex items-center gap-2 shrink-0 border border-[#3b82f6]/20"
             >
-              <MessageSquare size={18} />
+              <MessageSquare className="w-4 h-4 md:w-[18px] md:h-[18px]" />
               <span className="hidden sm:inline">Open Chat</span>
             </button>
           </div>

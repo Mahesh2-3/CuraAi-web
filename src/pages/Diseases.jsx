@@ -146,14 +146,14 @@ export default function Diseases() {
      UI
   ========================= */
   return (
-    <div className="flex flex-col min-h-screen p-6 relative">
+    <div className="flex flex-col min-h-screen p-4 md:p-6 relative">
       {/* Header & Add Button */}
       <div className="flex items-center justify-between mb-8">
         <div>
-          <h1 className="text-3xl font-bold bg-gradient-to-r from-[#3b82f6] to-blue-600 bg-clip-text text-transparent mb-1">
+          <h1 className="text-xl md:text-2xl font-bold bg-gradient-to-r from-[#3b82f6] to-blue-600 bg-clip-text text-transparent mb-1">
             Your Diseases
           </h1>
-          <p className="text-zinc-300">
+          <p className="text-zinc-300 text-sm md:text-base max-md:text-xs">
             Track and manage your health conditions.
           </p>
         </div>
@@ -179,10 +179,10 @@ export default function Diseases() {
           <div className="w-20 h-20 bg-zinc-800 border border-zinc-700 shadow-sm rounded-full flex items-center justify-center mb-6">
             <Activity size={32} className="text-[#3b82f6]" />
           </div>
-          <h3 className="text-xl font-semibold text-white mb-2">
+          <h3 className="text-sm md:text-xl font-semibold text-white mb-2">
             No diseases tracked yet
           </h3>
-          <p className="text-zinc-500 mb-6">
+          <p className="text-zinc-500 mb-6 max-md:text-xs">
             Keep a record of your medical conditions to get better insights and
             care recommendations.
           </p>
@@ -210,10 +210,10 @@ export default function Diseases() {
               <Link
                 key={item.id}
                 to={`/diseases/${item.id}`}
-                className="bg-zinc-800 border border-zinc-700 hover:border-[#3b82f6]/50 rounded-2xl p-5 transition-all hover:shadow-[0_4px_20px_rgba(76,175,80,0.1)] group flex flex-col"
+                className="bg-zinc-800 border border-zinc-700 hover:border-[#3b82f6]/50 rounded-2xl md:p-5 px-5 placeholder-gray-300 py-3 transition-all hover:shadow-[0_4px_20px_rgba(76,175,80,0.1)] group flex flex-col"
               >
                 <div className="flex items-start justify-between mb-4">
-                  <h3 className="font-semibold text-xl text-white group-hover:text-[#3b82f6] transition-colors line-clamp-1 pr-4">
+                  <h3 className="font-semibold md:text-xl text-lg text-white group-hover:text-[#3b82f6] transition-colors line-clamp-1 pr-4">
                     {item.diseaseName}
                   </h3>
                   <div
@@ -260,7 +260,7 @@ export default function Diseases() {
 
             <div className="space-y-4">
               <div>
-                <label className="block text-sm font-medium text-zinc-700 mb-1.5">
+                <label className="block text-sm font-medium text-zinc-300 mb-1.5">
                   Condition Name
                 </label>
                 <input
@@ -268,12 +268,12 @@ export default function Diseases() {
                   placeholder="e.g. Type 2 Diabetes"
                   value={diseaseName}
                   onChange={(e) => setDiseaseName(e.target.value)}
-                  className="w-full bg-zinc-800 border border-zinc-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-[#3b82f6] focus:ring-1 focus:ring-[#3b82f6] transition-colors"
+                  className="w-full bg-zinc-800 border max-md:text-sm border-zinc-700 rounded-xl px-4 py-3 text-white focus:outline-none max-md:placeholder:text-xs focus:border-[#3b82f6] focus:ring-1 focus:ring-[#3b82f6] transition-colors"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-zinc-700 mb-1.5">
+                <label className="block text-sm font-medium text-zinc-300 mb-1.5">
                   Details & Notes
                 </label>
                 <textarea
@@ -281,7 +281,7 @@ export default function Diseases() {
                   value={diseaseDetails}
                   onChange={(e) => setDiseaseDetails(e.target.value)}
                   rows={4}
-                  className="w-full bg-zinc-800 border border-zinc-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-[#3b82f6] focus:ring-1 focus:ring-[#3b82f6] transition-colors resize-none"
+                  className="w-full bg-zinc-800 border max-md:text-sm border-zinc-700 rounded-xl px-4 py-3 text-white focus:outline-none max-md:placeholder:text-xs focus:border-[#3b82f6] focus:ring-1 focus:ring-[#3b82f6] transition-colors resize-none"
                 />
               </div>
             </div>

@@ -24,6 +24,7 @@ export default function Home() {
   const [userMsg, setUserMsg] = useState("");
   const [messages, setMessages] = useState([]);
   const messagesEndRef = useRef(null);
+  const textareaRef = useRef(null);
 
   /* =========================
      AUTO SCROLL
@@ -81,6 +82,9 @@ export default function Home() {
 
     const content = userMsg.trim();
     setUserMsg("");
+    if (textareaRef.current) {
+      textareaRef.current.style.height = "auto";
+    }
 
     // 1. OPTIMISTIC UI UPDATE
     const tempId = `temp-${Math.random().toString(36).substring(2, 11)}`;
@@ -214,10 +218,10 @@ export default function Home() {
               <div className="w-6 h-6 bg-[#3b82f6] rounded-full"></div>
             </div>
           </div>
-          <h2 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-[#3b82f6] to-blue-600 bg-clip-text text-transparent mb-2">
+          <h2 className="text-xl md:text-3xl font-bold bg-gradient-to-r from-[#3b82f6] to-blue-600 bg-clip-text text-transparent mb-2">
             How are you feeling today?
           </h2>
-          <p className="text-zinc-500 text-lg">
+          <p className="text-zinc-500 text-sm md:text-lg">
             Describe your symptoms to get started.
           </p>
         </div>
@@ -266,23 +270,28 @@ export default function Home() {
         >
           <div className="flex-1 bg-zinc-800 border border-zinc-700 focus-within:border-[#3b82f6] focus-within:ring-1 focus-within:ring-[#3b82f6] rounded-2xl transition-all shadow-sm">
             <textarea
+              ref={textareaRef}
               value={userMsg}
-              onChange={(e) => setUserMsg(e.target.value)}
+              onChange={(e) => {
+                setUserMsg(e.target.value);
+                e.target.style.height = "auto";
+                e.target.style.height = `${e.target.scrollHeight}px`;
+              }}
               onKeyDown={(e) => {
                 if (e.key === "Enter" && !e.shiftKey) {
                   e.preventDefault();
                   handleSend();
                 }
               }}
-              placeholder="Describe your symptoms (e.g., I have a cough and mild fever...)"
-              className="w-full bg-transparent text-white px-4 py-3.5 max-h-32 min-h-[52px] focus:outline-none resize-none placeholder:text-zinc-500 block"
+              placeholder="Describe your symptoms.."
+              className="w-full bg-transparent text-white px-4 py-3.5 max-h-32 min-h-[52px] focus:outline-none resize-none placeholder:text-zinc-500 block overflow-y-auto hide-scrollbar"
               rows={1}
             />
           </div>
           <button
             type="submit"
             disabled={!userMsg.trim()}
-            className="flex-shrink-0 bg-[#3b82f6] hover:bg-blue-600 disabled:bg-zinc-200 disabled:text-zinc-300 text-white p-3.5 rounded-2xl transition-colors shadow-sm disabled:cursor-not-allowed"
+            className="flex-shrink-0 bg-[#3b82f6] hover:bg-blue-600 disabled:bg-[#a5a5a5] text-white p-3.5 rounded-2xl transition-colors shadow-sm disabled:cursor-not-allowed"
           >
             <Send
               size={20}

@@ -336,22 +336,52 @@ export default function Layout() {
 
       {/* Main Content Area */}
       <main
-        className={`flex-1 relative flex flex-col h-screen overflow-hidden transition-all duration-300 ${isSidebarOpen ? "ml-64" : "ml-0"}`}
+        className={`flex-1 relative flex flex-col h-screen overflow-hidden transition-all duration-300 ${isSidebarOpen ? "md:ml-64" : "ml-0"}`}
       >
-        {/* Main Content Header for Global Toggle Button (Mobile/Desktop logic for hidden sidebar) */}
+        {/* Main Content Header for Global Toggle Button */}
         {!isSidebarOpen && (
-          <div className="absolute top-4 left-4 z-10">
-            <button
-              onClick={toggleSidebar}
-              className="p-2 rounded-lg bg-zinc-800 text-zinc-300 hover:text-white shadow-md border border-zinc-700 hover:bg-zinc-700 transition-colors"
-              aria-label="Open sidebar"
-            >
-              <Menu size={24} />
-            </button>
-          </div>
+          <>
+            {/* Desktop floating button */}
+            <div className="hidden md:block absolute top-4 left-4 z-20">
+              <button
+                onClick={toggleSidebar}
+                className="p-2 rounded-lg bg-zinc-800 text-zinc-300 hover:text-white shadow-md border border-zinc-700 hover:bg-zinc-700 transition-colors"
+                aria-label="Open sidebar"
+              >
+                <Menu size={24} />
+              </button>
+            </div>
+
+            {/* Mobile Header Bar */}
+            <div className="md:hidden flex items-center justify-between px-4 py-3 bg-zinc-900/90 backdrop-blur-md border-b border-zinc-800 z-20 shrink-0">
+              <div className="flex items-center gap-3">
+                <button
+                  onClick={toggleSidebar}
+                  className="p-1.5 rounded-lg bg-zinc-800 text-zinc-300 hover:text-white shadow-sm border border-zinc-700 transition-colors"
+                  aria-label="Open sidebar"
+                >
+                  <Menu size={20} />
+                </button>
+                <h1 className="text-lg font-bold bg-gradient-to-r from-[#3b82f6] to-blue-600 bg-clip-text text-transparent">
+                  CuraAi
+                </h1>
+              </div>
+              <Link to={"/profile"}>
+                <img
+                  src={
+                    profile?.profileImage ||
+                    user.photoURL ||
+                    "/images/defaultProfile.jpg"
+                  }
+                  alt="Profile"
+                  className="w-8 h-8 rounded-full border border-zinc-600 object-cover"
+                />
+              </Link>
+            </div>
+          </>
         )}
 
-        <div className="flex-1 overflow-y-auto w-full">
+        <div className="flex-1 overflow-y-auto w-full relative z-10">
           <Outlet />
         </div>
       </main>
