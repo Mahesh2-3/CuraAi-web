@@ -1,6 +1,15 @@
 {
     "headers": [
         {
+            "source": "/(.*)",
+            "headers": [
+                {
+                    "key": "X-Robots-Tag",
+                    "value": "index, follow"
+                }
+            ]
+        },
+        {
             "source": "/sitemap.xml",
             "headers": [
                 {
@@ -8,6 +17,12 @@
                     "value": "application/xml"
                 }
             ]
+        }
+    ],
+    "rewrites": [
+        {
+            "source": "/(.*)",
+            "destination": "/index.html"
         }
     ]
 }
