@@ -57,6 +57,7 @@ export default function ManageConversation() {
       type: "danger",
       isAlert: false,
       onConfirm: async () => {
+        closeModal();
         try {
           const batch = writeBatch(db);
 
@@ -94,6 +95,7 @@ export default function ManageConversation() {
       type: "danger",
       isAlert: false,
       onConfirm: async () => {
+        closeModal();
         setIsClearing(true);
         try {
           const batch = writeBatch(db);

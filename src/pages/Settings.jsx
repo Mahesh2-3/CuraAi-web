@@ -9,10 +9,57 @@ import {
   Search,
 } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../context/authContext";
+import { EmailAuthProvider, reauthenticateWithCredential } from "firebase/auth";
 
 export default function Settings() {
   const navigate = useNavigate();
+  const { user, logout } = useAuth();
   const [searchQuery, setSearchQuery] = useState("");
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [passwordConfirm, setPasswordConfirm] = useState("");
+  const [isDeleting, setIsDeleting] = useState(false);
+
+  const handleDeleteAccount = async () => {
+    if (!user || !passwordConfirm) return;
+    setIsDeleting(true);
+
+    try {
+      // Re-authenticate user first
+      const credential = EmailAuthProvider.credential(
+        user.email,
+        passwordConfirm,
+      );
+      await reauthenticateWithCredential(user, credential);
+
+      // Tell backend to delete account in Firestore and Firebase Auth
+      const response = await fetch(
+        `${import.meta.env.VITE_BACKEND_URL}/auth/delete-account`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email: user.email }),
+        },
+      );
+
+      if (!response.ok) {
+        throw new Error("Failed to delete account on the server");
+      }
+
+      // Cleanup local state and navigate away
+      logout();
+      navigate("/login");
+    } catch (error) {
+      alert(
+        error.message === "Firebase: Error (auth/invalid-credential)."
+          ? "Incorrect password."
+          : "An error occurred while deleting your account.",
+      );
+    } finally {
+      setIsDeleting(false);
+      setPasswordConfirm("");
+    }
+  };
 
   const sections = [
     {
@@ -206,8 +253,79 @@ export default function Settings() {
               No settings found matching "{searchQuery}"
             </div>
           )}
+
+          {/* Delete Account Section */}
+          <div className="pt-4 border-t border-zinc-700/50">
+            <button
+              onClick={() => setIsDeleteModalOpen(true)}
+              className="w-full flex items-center justify-between p-4 bg-red-500/10 hover:bg-red-500/20 rounded-2xl transition-colors group text-left"
+            >
+              <div className="flex items-center gap-4">
+                <div className="w-10 h-10 bg-red-500/20 rounded-lg flex items-center justify-center group-hover:bg-red-500/30 transition-all">
+                  <span className="text-red-500 font-bold">!</span>
+                </div>
+                <div className="flex flex-col">
+                  <span className="font-medium text-red-500">
+                    Delete Account
+                  </span>
+                  <span className="text-xs text-red-400/80">
+                    Permanently delete your data
+                  </span>
+                </div>
+              </div>
+            </button>
+          </div>
         </div>
       </div>
+
+      {/* Delete Confirmation Modal */}
+      {isDeleteModalOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center px-4">
+          <div
+            className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+            onClick={() => setIsDeleteModalOpen(false)}
+          />
+          <div className="relative bg-zinc-900 border border-zinc-800 rounded-2xl p-6 w-full max-w-md shadow-2xl">
+            <h3 className="text-xl font-bold text-white mb-2">
+              Delete Account
+            </h3>
+            <p className="text-zinc-400 text-sm mb-6">
+              This action cannot be undone. All your conversations, history, and
+              profile data will be permanently removed. To confirm, please enter
+              your password.
+            </p>
+
+            <input
+              type="password"
+              placeholder="Enter your password"
+              value={passwordConfirm}
+              onChange={(e) => setPasswordConfirm(e.target.value)}
+              className="w-full bg-zinc-800 border border-zinc-700 rounded-xl px-4 py-3 mb-6 text-white placeholder:text-zinc-500 focus:outline-none focus:border-red-500 focus:ring-1 focus:ring-red-500 transition-colors"
+            />
+
+            <div className="flex gap-3">
+              <button
+                onClick={() => setIsDeleteModalOpen(false)}
+                className="flex-1 bg-zinc-800 hover:bg-zinc-700 text-white font-medium py-3 rounded-xl transition-colors"
+                disabled={isDeleting}
+              >
+                Cancel
+              </button>
+              <button
+                onClick={handleDeleteAccount}
+                disabled={!passwordConfirm || isDeleting}
+                className="flex-1 flex justify-center items-center bg-red-500 hover:bg-red-600 disabled:opacity-50 text-white font-medium py-3 rounded-xl transition-colors"
+              >
+                {isDeleting ? (
+                  <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
+                ) : (
+                  "Delete Account"
+                )}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

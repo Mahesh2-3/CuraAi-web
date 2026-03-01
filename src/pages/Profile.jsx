@@ -170,35 +170,6 @@ export default function Profile() {
               </div>
             </div>
           </div>
-
-          {/* Emergency Contact */}
-          <div className="bg-zinc-800 border border-zinc-700 rounded-2xl p-6 shadow-sm">
-            <h3 className="text-lg font-semibold mb-4 flex items-center gap-2 text-red-400">
-              <AlertCircle size={20} /> Emergency Contact
-            </h3>
-            <div className="space-y-4">
-              <div>
-                <span className="text-sm text-zinc-300 block mb-1">Name</span>
-                <p className="text-white font-medium">
-                  {userData?.emergency?.name || "Not specified"}
-                </p>
-                {userData?.emergency?.relationship && (
-                  <span className="text-xs text-zinc-500">
-                    {userData.emergency.relationship}
-                  </span>
-                )}
-              </div>
-              <div>
-                <span className="text-sm text-zinc-300 block mb-1">
-                  Phone Number
-                </span>
-                <div className="flex items-center gap-2 text-white font-medium">
-                  <Phone size={16} className="text-zinc-300" />
-                  {userData?.emergency?.phone || "Not specified"}
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
 
         {/* Options */}

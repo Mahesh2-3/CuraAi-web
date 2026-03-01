@@ -2,16 +2,43 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { ArrowLeft, Send } from "lucide-react";
 import { useState } from "react";
+import { useAuth } from "../../../../context/authContext";
 
 export default function ReportProblem() {
   const [issue, setIssue] = useState("");
   const [details, setDetails] = useState("");
   const [submitted, setSubmitted] = useState(false);
+  const { user } = useAuth();
+  const [loading, setLoading] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Here you would typically send the report to a backend/Firebase
-    setSubmitted(true);
+    setLoading(true);
+    try {
+      const response = await fetch(
+        `${import.meta.env.VITE_BACKEND_URL}/report`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            userId: user?.uid || "",
+            userEmail: user?.email || "",
+            userName: user?.displayName || "",
+            issue,
+            details,
+          }),
+        },
+      );
+
+      if (!response.ok) {
+        throw new Error("Failed to submit report");
+      }
+      setSubmitted(true);
+    } catch (error) {
+      alert("There was an error submitting your report. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   if (submitted) {
@@ -97,10 +124,15 @@ export default function ReportProblem() {
 
           <button
             type="submit"
-            className="w-full flex items-center justify-center gap-2 bg-[#3b82f6] hover:bg-[#2563eb] text-white px-8 py-3.5 rounded-xl font-medium transition-colors shadow-sm"
+            disabled={loading}
+            className="w-full flex items-center justify-center gap-2 bg-[#3b82f6] hover:bg-[#2563eb] disabled:opacity-50 text-white px-8 py-3.5 rounded-xl font-medium transition-colors shadow-sm"
           >
-            <Send size={18} />
-            <span>Submit Report</span>
+            {loading ? (
+              <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
+            ) : (
+              <Send size={18} />
+            )}
+            <span>{loading ? "Submitting..." : "Submit Report"}</span>
           </button>
         </form>
       </div>

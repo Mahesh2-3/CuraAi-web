@@ -238,7 +238,7 @@ export default function Layout() {
               <Plus size={20} />
               <span className="text-sm">New Chat</span>
             </button>
-            <div className="flex shrink-0 items-center justify-between px-3 mb-2">
+            <div className="flex shrink-0 items-center justify-between px-3 mb-2 mt-4">
               <span className="text-xs font-semibold text-zinc-300 uppercase tracking-wider">
                 Recent Chats
               </span>

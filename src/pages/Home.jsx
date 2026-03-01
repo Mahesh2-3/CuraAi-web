@@ -184,11 +184,6 @@ export default function Home() {
 
     try {
       // Trigger AI
-      console.log("Initiating AI response fetch...", {
-        userId: user.uid,
-        conversationId,
-        ipAddress,
-      });
       fetch(`${ipAddress}/ai-response`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -198,14 +193,11 @@ export default function Home() {
         }),
       })
         .then((res) => {
-          console.log("AI response fetch completed with status:", res.status);
           return res;
         })
         .catch((err) => {
-          console.error("AI response fetch error:", err);
         });
     } catch (error) {
-      console.error("Error setting up AI response fetch:", error);
     }
   }
 

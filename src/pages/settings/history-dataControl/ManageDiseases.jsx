@@ -57,6 +57,7 @@ export default function ManageDiseases() {
       type: "danger",
       isAlert: false,
       onConfirm: async () => {
+        closeModal();
         try {
           const batch = writeBatch(db);
           const chatSnap = await getDocs(
@@ -90,6 +91,7 @@ export default function ManageDiseases() {
       type: "warning",
       isAlert: false,
       onConfirm: async () => {
+        closeModal();
         try {
           const batch = writeBatch(db);
           const chatSnap = await getDocs(
@@ -97,14 +99,16 @@ export default function ManageDiseases() {
           );
           chatSnap.forEach((doc) => batch.delete(doc.ref));
           await batch.commit();
-          setModalState({
-            isOpen: true,
-            title: "Success",
-            message: "Chat cleared successfully.",
-            type: "success",
-            isAlert: true,
-            onConfirm: null,
-          });
+          setTimeout(() => {
+            setModalState({
+              isOpen: true,
+              title: "Success",
+              message: "Chat cleared successfully.",
+              type: "success",
+              isAlert: true,
+              onConfirm: null,
+            });
+          }, 500); // Give modal time to close before showing success
         } catch (err) {
           setModalState({
             isOpen: true,
@@ -130,6 +134,7 @@ export default function ManageDiseases() {
       type: "danger",
       isAlert: false,
       onConfirm: async () => {
+        closeModal();
         setIsClearing(true);
         try {
           const batch = writeBatch(db);

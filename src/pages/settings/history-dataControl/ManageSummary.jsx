@@ -86,6 +86,7 @@ export default function ManageSummary() {
       type: "danger",
       isAlert: false,
       onConfirm: async () => {
+        closeModal(); // Close immediately on confirm
         try {
           await deleteDoc(doc(db, "users", user.uid, "summaries", key));
           setSummaries((prev) => {

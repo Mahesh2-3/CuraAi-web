@@ -11,7 +11,6 @@ import {
   AlertCircle,
   Droplet,
   Users,
-  Camera,
 } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import ConfirmModal from "../components/ConfirmModal";
@@ -34,9 +33,6 @@ export default function EditProfile() {
     bloodGroup: "",
     chronic: "",
     allergies: "",
-    emergencyName: "",
-    emergencyPhone: "",
-    emergencyRelationship: "",
     profileImage: "",
   });
   const [modalState, setModalState] = useState({
@@ -74,9 +70,6 @@ export default function EditProfile() {
           bloodGroup: d.bloodGroup || "",
           chronic: d.chronic ? d.chronic.join(", ") : "",
           allergies: d.allergies ? d.allergies.join(", ") : "",
-          emergencyName: d.emergency?.name || "",
-          emergencyPhone: d.emergency?.phone || "",
-          emergencyRelationship: d.emergency?.relationship || "",
           profileImage: d.profileImage || user.photoURL || "",
         };
         setFormData(initial);
@@ -155,11 +148,6 @@ export default function EditProfile() {
               .map((s) => s.trim())
               .filter((s) => s)
           : [],
-        emergency: {
-          name: formData.emergencyName,
-          phone: formData.emergencyPhone,
-          relationship: formData.emergencyRelationship,
-        },
         profileImage: formData.profileImage,
         updatedAt: new Date().toISOString(),
       });
@@ -239,7 +227,6 @@ export default function EditProfile() {
 
                 <label className="absolute inset-0 flex items-center justify-center bg-black/60 rounded-full opacity-0 group-hover:opacity-100 cursor-pointer transition-opacity backdrop-blur-sm">
                   <div className="flex flex-col items-center text-white">
-                    <Camera size={24} className="mb-1" />
                     <span className="text-xs font-semibold">Change</span>
                   </div>
                   <input
@@ -432,78 +419,6 @@ export default function EditProfile() {
                     }
                     placeholder="Peanuts, Penicillin..."
                     className="w-full bg-zinc-900 border border-zinc-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-[#3b82f6] focus:ring-1 focus:ring-[#3b82f6] transition-colors resize-none"
-                  />
-                </div>
-              </div>
-            </div>
-
-            {/* Emergency Contact */}
-            <div className="bg-zinc-800 border border-zinc-700 rounded-2xl p-6 shadow-sm space-y-6">
-              <h2 className="text-lg font-semibold mb-4 flex items-center gap-2 text-red-400">
-                <AlertCircle size={20} /> Emergency Contact
-              </h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="space-y-1.5">
-                  <label className="text-sm font-medium text-zinc-300 ml-1">
-                    Contact Name
-                  </label>
-                  <div className="relative">
-                    <input
-                      type="text"
-                      value={formData.emergencyName}
-                      onChange={(e) =>
-                        setFormData({
-                          ...formData,
-                          emergencyName: e.target.value,
-                        })
-                      }
-                      className="w-full bg-zinc-900 border border-zinc-700 rounded-xl px-4 py-3 pl-11 text-white focus:outline-none focus:border-red-500 focus:ring-1 focus:ring-red-500 transition-colors"
-                    />
-                    <Users
-                      className="absolute left-4 top-3.5 text-zinc-300"
-                      size={18}
-                    />
-                  </div>
-                </div>
-
-                <div className="space-y-1.5">
-                  <label className="text-sm font-medium text-zinc-300 ml-1">
-                    Contact Phone
-                  </label>
-                  <div className="relative">
-                    <input
-                      type="tel"
-                      value={formData.emergencyPhone}
-                      onChange={(e) =>
-                        setFormData({
-                          ...formData,
-                          emergencyPhone: e.target.value,
-                        })
-                      }
-                      className="w-full bg-zinc-900 border border-zinc-700 rounded-xl px-4 py-3 pl-11 text-white focus:outline-none focus:border-red-500 focus:ring-1 focus:ring-red-500 transition-colors"
-                    />
-                    <Phone
-                      className="absolute left-4 top-3.5 text-zinc-300"
-                      size={18}
-                    />
-                  </div>
-                </div>
-
-                <div className="space-y-1.5 md:col-span-2">
-                  <label className="text-sm font-medium text-zinc-300 ml-1">
-                    Relationship
-                  </label>
-                  <input
-                    type="text"
-                    placeholder="e.g. Mother, Spouse"
-                    value={formData.emergencyRelationship}
-                    onChange={(e) =>
-                      setFormData({
-                        ...formData,
-                        emergencyRelationship: e.target.value,
-                      })
-                    }
-                    className="w-full bg-zinc-900 border border-zinc-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-red-500 focus:ring-1 focus:ring-red-500 transition-colors"
                   />
                 </div>
               </div>
