@@ -5,13 +5,13 @@ import { getFunctions } from "firebase/functions";
 import { getStorage } from "firebase/storage";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyAgy-4LZZDEzWCRdMJFkeumhABljKEDU4Q",
-  authDomain: "curaai-27023.firebaseapp.com",
-  projectId: "curaai-27023",
-  storageBucket: "curaai-27023.firebasestorage.app",
-  messagingSenderId: "721018161379",
-  appId: "1:721018161379:web:3dbb3216d4b96fa2dc5dd6",
-  measurementId: "G-KMGRTV7L04",
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_FIREBASE_APP_ID,
+  measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID,
 };
 // Initialize Firebase
 const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApp();
