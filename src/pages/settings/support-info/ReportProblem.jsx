@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { ArrowLeft, Send } from "lucide-react";
 import { useState } from "react";
-import { useAuth } from "../../../../context/authContext";
+import { useAuth } from "@/context/authContext";
 
 export default function ReportProblem() {
   const [issue, setIssue] = useState("");
