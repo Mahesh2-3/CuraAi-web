@@ -99,7 +99,7 @@ export default function Home() {
       {
         id: `loading-${tempId}`,
         role: "assistant",
-        message: "AI is typing...",
+        message: "Ai is typing...",
         attachment: null,
         status: "loading",
       },
@@ -172,7 +172,7 @@ export default function Home() {
       ),
       {
         role: "assistant",
-        content: "Ai is typing....",
+        content: "Ai is typing...",
         status: "loading",
         createdAt: serverTimestamp(),
       },
@@ -195,10 +195,8 @@ export default function Home() {
         .then((res) => {
           return res;
         })
-        .catch((err) => {
-        });
-    } catch (error) {
-    }
+        .catch((err) => {});
+    } catch (error) {}
   }
 
   return (
@@ -241,11 +239,13 @@ export default function Home() {
                 <p className="whitespace-pre-wrap">{item.message}</p>
               ) : (
                 <div className="prose prose-invert prose-blue max-w-none prose-p:leading-relaxed prose-pre:bg-zinc-800 prose-pre:border prose-pre:border-zinc-700">
-                  <Markdown remarkPlugins={[remarkGfm]}>
-                    {item.message
-                      ? item.message.replace(/\\([#*_\-`>![\]()])/g, "$1")
-                      : ""}
-                  </Markdown>
+                  {item.message != "Ai is typing..." ? (
+                    <Markdown remarkPlugins={[remarkGfm]}>
+                      {item.message.replace(/\\([#*_\-`>![\]()])/g, "$1")}
+                    </Markdown>
+                  ) : (
+                    <div className="animate-pulse w-4 h-4 bg-[#3b82f6] rounded-full" />
+                  )}
                 </div>
               )}
             </div>
