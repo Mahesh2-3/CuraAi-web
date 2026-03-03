@@ -34,7 +34,7 @@ export default function Settings() {
 
       // Tell backend to delete account in Firestore and Firebase Auth
       const response = await fetch(
-        `${import.meta.env.VITE_BACKEND_URL}/auth/delete-account`,
+        `${import.meta.env.VITE_SERVER_URL}/auth/delete-account`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },

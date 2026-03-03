@@ -124,6 +124,107 @@ export default function EditProfile() {
 
   const handleSave = async (e) => {
     e.preventDefault();
+
+    if (!formData.name || formData.name.trim().length < 3) {
+      setModalState({
+        isOpen: true,
+        title: "Validation Error",
+        message: "Name must be at least 3 characters long.",
+        type: "danger",
+        isAlert: true,
+      });
+      return;
+    }
+    if (/^\d+$/.test(formData.name.trim())) {
+      setModalState({
+        isOpen: true,
+        title: "Validation Error",
+        message: "Name cannot contain only numbers.",
+        type: "danger",
+        isAlert: true,
+      });
+      return;
+    }
+    if (formData.phone && !/^\d{10}$/.test(formData.phone)) {
+      setModalState({
+        isOpen: true,
+        title: "Validation Error",
+        message: "Phone number must be exactly 10 digits.",
+        type: "danger",
+        isAlert: true,
+      });
+      return;
+    }
+    if (formData.dob) {
+      const dobDate = new Date(formData.dob);
+      const today = new Date();
+      let age = today.getFullYear() - dobDate.getFullYear();
+      const m = today.getMonth() - dobDate.getMonth();
+      if (m < 0 || (m === 0 && today.getDate() < dobDate.getDate())) {
+        age--;
+      }
+      if (age <= 14) {
+        setModalState({
+          isOpen: true,
+          title: "Validation Error",
+          message: "Age must be greater than 14 years.",
+          type: "danger",
+          isAlert: true,
+        });
+        return;
+      }
+    }
+    if (
+      formData.weight &&
+      (isNaN(formData.weight) || Number(formData.weight) <= 0)
+    ) {
+      setModalState({
+        isOpen: true,
+        title: "Validation Error",
+        message: "Please enter a valid weight greater than 0.",
+        type: "danger",
+        isAlert: true,
+      });
+      return;
+    }
+    if (
+      formData.height &&
+      (isNaN(formData.height) || Number(formData.height) <= 0)
+    ) {
+      setModalState({
+        isOpen: true,
+        title: "Validation Error",
+        message: "Please enter a valid height greater than 0.",
+        type: "danger",
+        isAlert: true,
+      });
+      return;
+    }
+    const isOnlyNumbers = (str) => {
+      const processed = str.replace(/,/g, "").trim();
+      return processed.length > 0 && /^\d+$/.test(processed);
+    };
+    if (formData.chronic && isOnlyNumbers(formData.chronic)) {
+      setModalState({
+        isOpen: true,
+        title: "Validation Error",
+        message: "Chronic conditions should not contain only numbers.",
+        type: "danger",
+        isAlert: true,
+      });
+      return;
+    }
+    if (formData.allergies && isOnlyNumbers(formData.allergies)) {
+      setModalState({
+        isOpen: true,
+        title: "Validation Error",
+        message: "Allergies should not contain only numbers.",
+        type: "danger",
+        isAlert: true,
+      });
+      return;
+    }
+
     setSaving(true);
     try {
       const ref = doc(db, "users", user.uid);
@@ -274,9 +375,13 @@ export default function EditProfile() {
                   <div className="relative">
                     <input
                       type="tel"
+                      maxLength="10"
                       value={formData.phone}
                       onChange={(e) =>
-                        setFormData({ ...formData, phone: e.target.value })
+                        setFormData({
+                          ...formData,
+                          phone: e.target.value.replace(/\D/g, ""),
+                        })
                       }
                       className="w-full bg-zinc-900 border border-zinc-700 rounded-xl px-4 py-3 pl-11 text-white focus:outline-none focus:border-[#3b82f6] focus:ring-1 focus:ring-[#3b82f6] transition-colors"
                     />
@@ -337,6 +442,7 @@ export default function EditProfile() {
                   <div className="relative">
                     <input
                       type="number"
+                      min="0"
                       value={formData.weight}
                       onChange={(e) =>
                         setFormData({ ...formData, weight: e.target.value })
@@ -357,6 +463,7 @@ export default function EditProfile() {
                   <div className="relative">
                     <input
                       type="number"
+                      min="0"
                       value={formData.height}
                       onChange={(e) =>
                         setFormData({ ...formData, height: e.target.value })
@@ -371,18 +478,28 @@ export default function EditProfile() {
                     Blood Group
                   </label>
                   <div className="relative">
-                    <input
-                      type="text"
-                      placeholder="e.g. O+"
+                    <select
                       value={formData.bloodGroup}
                       onChange={(e) =>
                         setFormData({
                           ...formData,
-                          bloodGroup: e.target.value.toUpperCase(),
+                          bloodGroup: e.target.value,
                         })
                       }
-                      className="w-full bg-zinc-900 border border-zinc-700 rounded-xl px-4 py-3 pl-11 text-white focus:outline-none focus:border-[#3b82f6] focus:ring-1 focus:ring-[#3b82f6] transition-colors"
-                    />
+                      className="w-full bg-zinc-900 border border-zinc-700 rounded-xl px-4 py-3 pl-11 text-white focus:outline-none focus:border-[#3b82f6] focus:ring-1 focus:ring-[#3b82f6] transition-colors appearance-none"
+                    >
+                      <option value="" disabled>
+                        Select Blood Group
+                      </option>
+                      <option value="A+">A+</option>
+                      <option value="A-">A-</option>
+                      <option value="B+">B+</option>
+                      <option value="B-">B-</option>
+                      <option value="AB+">AB+</option>
+                      <option value="AB-">AB-</option>
+                      <option value="O+">O+</option>
+                      <option value="O-">O-</option>
+                    </select>
                     <Droplet
                       className="absolute left-4 top-3.5 text-red-500"
                       size={18}
