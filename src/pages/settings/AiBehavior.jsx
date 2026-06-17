@@ -1,3 +1,11 @@
+/**
+ * AiBehavior.jsx
+ * 
+ * AI Behavior Slider Page.
+ * - Allows customization of AI chatbot personality metrics (tone, length, formatting preferences).
+ * - Saves configurations in local database/storage frameworks.
+ */
+
 import { useState, useEffect, useMemo } from "react";
 import { Link } from "react-router-dom";
 import { ArrowLeft, Check } from "lucide-react";

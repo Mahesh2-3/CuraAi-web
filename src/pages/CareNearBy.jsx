@@ -1,6 +1,18 @@
+/**
+ * CareNearBy.jsx
+ * 
+ * Care Nearby Finder Page.
+ * - Utilizes the browser's Geolocation API (`navigator.geolocation`) to identify user coordinates.
+ * - Queries public OpenStreetMap servers using Overpass API interpreter URLs (`OVERPASS_URLS`).
+ * - Employs the Haversine formula (`getDistanceKm`) to compute straight-line geographic distances.
+ * - Supports dynamic radius parameters and sorting orders (Nearest vs. Farthest).
+ * - Offers direct integration with Google Maps API to provide navigational routes.
+ */
+
 import { useState, useEffect, useCallback } from "react";
 import { MapPin, Navigation, Search, AlertCircle } from "lucide-react";
 
+// List of fallback Overpass API mirrors to maximize service reliability
 const OVERPASS_URLS = [
   "https://overpass-api.de/api/interpreter",
   "https://lz4.overpass-api.de/api/interpreter",
@@ -162,11 +174,11 @@ export default function CareNearBy() {
           </p>
         </div>
 
-        {/* Controls */}
+        {/* Controls: Radius filter, Sorting order, and Manual locating */}
         <div className="flex flex-wrap gap-3">
           <button
             onClick={() => setRadiusKm((prev) => (prev >= 20 ? 5 : prev + 5))}
-            className="flex items-center gap-2 bg-zinc-800 hover:bg-zinc-800 border border-zinc-700 px-4 py-2.5 rounded-xl transition-colors shrink-0 shadow-sm max-md:text-sm"
+            className="flex items-center gap-2 bg-zinc-800 hover:bg-zinc-700 border border-zinc-700 px-4 py-2.5 rounded-xl transition-colors shrink-0 shadow-sm max-md:text-sm"
           >
             <Search size={18} className="text-[#3b82f6]" />
             <span className="text-white font-medium whitespace-nowrap">
@@ -178,7 +190,7 @@ export default function CareNearBy() {
             onClick={() =>
               setSortOrder((prev) => (prev === "asc" ? "desc" : "asc"))
             }
-            className="flex items-center gap-2 bg-zinc-800 hover:bg-zinc-800 border border-zinc-700 px-4 py-2.5 rounded-xl transition-colors shrink-0 shadow-sm max-md:text-sm"
+            className="flex items-center gap-2 bg-zinc-800 hover:bg-zinc-700 border border-zinc-700 px-4 py-2.5 rounded-xl transition-colors shrink-0 shadow-sm max-md:text-sm"
           >
             <Navigation size={18} className="text-blue-500" />
             <span className="text-white font-medium whitespace-nowrap">

@@ -1,3 +1,12 @@
+/**
+ * Layout.jsx
+ * 
+ * Layout component for the authenticated section of the CuraWeb application.
+ * Manages responsive sidebar toggle behavior, lists recent chat conversations loaded
+ * from Firestore, provides navigation links to settings/profile, and renders
+ * the child pages via the React Router `Outlet`.
+ */
+
 import {
   Outlet,
   Navigate,
@@ -114,6 +123,7 @@ export default function Layout() {
         doc(db, "users", user.uid, "conversations", chatToDelete),
       );
     } catch (error) {
+      console.error("Failed to delete conversation:", error);
     } finally {
       setChatToDelete(null);
       setIsConfirmModalOpen(false);

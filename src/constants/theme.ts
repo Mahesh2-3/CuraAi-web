@@ -1,3 +1,10 @@
+/**
+ * theme.ts
+ * 
+ * Design System and Menu Constants.
+ * - Houses primary theme palettes, dark/light configuration maps, layout options, and navigation listings.
+ */
+
 import {
   AlertTriangle,
   Hospital,

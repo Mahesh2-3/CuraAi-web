@@ -1,3 +1,10 @@
+/**
+ * ManageConversation.jsx
+ * 
+ * Chat Logs Manager.
+ * - Lists past chat conversations with clear buttons to permanently remove items from the database.
+ */
+
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { ArrowLeft, Trash2, MessageSquare } from "lucide-react";

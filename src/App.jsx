@@ -1,3 +1,12 @@
+/**
+ * App.jsx
+ * 
+ * Root component of the CuraWeb React application.
+ * Defines the application routing table using React Router (`BrowserRouter`, `Routes`, `Route`).
+ * Uses dynamic imports (`React.lazy` and `Suspense`) for performance optimization (lazy-loading pages).
+ * Wraps routes inside AuthProvider and ConversationProvider to enable global session and chat states.
+ */
+
 import React, { Suspense, lazy } from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { AuthProvider } from "./context/authContext";

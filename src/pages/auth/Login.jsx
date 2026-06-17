@@ -1,3 +1,11 @@
+/**
+ * Login.jsx
+ * 
+ * User Sign-in Page.
+ * - Authenticates user credentials (email/password) using Firebase client SDKs.
+ * - Routes successful authentication sessions directly to the application dashboard.
+ */
+
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/authContext";

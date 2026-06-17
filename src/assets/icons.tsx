@@ -1,3 +1,10 @@
+/**
+ * icons.tsx
+ * 
+ * SVG Icon Components Library.
+ * - Houses standardized SVG icons wrapped as reusable React components.
+ */
+
 import {
     AntDesign,
     Entypo,

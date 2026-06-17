@@ -1,3 +1,12 @@
+/**
+ * DiseaseDetail.jsx
+ * 
+ * Disease Details Page.
+ * - Displays comprehensive symptom analysis, threat percentages, and history for a chosen condition.
+ * - Fetches records in real-time from Firestore.
+ * - Integrates navigation to specific disease-focused AI chat channels.
+ */
+
 import { useState, useEffect } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/authContext";

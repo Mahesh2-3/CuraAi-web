@@ -1,3 +1,11 @@
+/**
+ * Signup.jsx
+ * 
+ * Account Registration Page.
+ * - Manages user signup fields (email, password, phone number).
+ * - Integrates Nodemailer email-based OTP verification before registering the user on Firebase.
+ */
+
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import {

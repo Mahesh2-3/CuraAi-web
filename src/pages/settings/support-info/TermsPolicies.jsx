@@ -1,3 +1,10 @@
+/**
+ * TermsPolicies.jsx
+ * 
+ * Privacy and Terms Page.
+ * - Details terms of service agreements, cookie configs, and privacy structures.
+ */
+
 import React from "react";
 import { Link } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";

@@ -1,3 +1,10 @@
+/**
+ * conversationContext.tsx
+ * 
+ * Global Conversation Context Provider.
+ * - Tracks the active conversation ID across sidebar navigations and dashboard page displays.
+ */
+
 import React, { createContext, useContext, useState } from "react";
 
 type ConversationContextType = {

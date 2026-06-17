@@ -1,3 +1,10 @@
+/**
+ * ForgotPassword.jsx
+ * 
+ * Password Recovery Page.
+ * - Connects to Firebase Auth to dispatch password reset link emails to the specified user account.
+ */
+
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Mail, Eye, EyeOff } from "lucide-react";

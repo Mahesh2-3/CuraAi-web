@@ -1,3 +1,10 @@
+/**
+ * uploadCloudinary.js
+ * 
+ * Cloudinary Media uploader.
+ * - Posts images/files to Cloudinary API repositories and returns secure retrieval URLs.
+ */
+
 export const uploadFileToCloudinary = async (file) => {
   const CLOUD_NAME = "dhiluevpk";
   const UPLOAD_PRESET = "CuraAi";

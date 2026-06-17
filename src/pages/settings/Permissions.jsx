@@ -1,3 +1,10 @@
+/**
+ * Permissions.jsx
+ * 
+ * Hardware Permissions Configuration.
+ * - Displays and updates user permissions regarding device features (Camera, Microphone, Storage).
+ */
+
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { ArrowLeft, MapPin, Camera, Mic } from "lucide-react";

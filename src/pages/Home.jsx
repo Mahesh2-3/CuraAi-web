@@ -1,3 +1,14 @@
+/**
+ * Home.jsx
+ * 
+ * Main Dashboard / AI Symptom Checker Page.
+ * - Manages active chat conversations with a clinician/AI assistant.
+ * - Utilizes real-time subscriptions (`onSnapshot`) to listen for incoming chat messages from Firestore.
+ * - Handles optimistic updates during messages submission, rendering UI placeholders immediately.
+ * - Persists conversation metadata (e.g. dynamic title generated from first user query) and individual messages.
+ * - Triggers backend AI generation via a web API call to the Node.js Express server.
+ */
+
 import { useState, useEffect, useRef } from "react";
 import { useAuth } from "../context/authContext";
 import { useConversation } from "../context/conversationContext";
@@ -14,38 +25,48 @@ import {
   addDoc,
 } from "firebase/firestore";
 import Markdown from "react-markdown";
-import remarkGfm from "remark-gfm"; // for tables etc
+import remarkGfm from "remark-gfm"; // MD plugin supporting GFM components (such as table styling, link shortcuts)
 import { Send } from "lucide-react";
 import ChatAttachment from "../components/ChatAttachment";
 
 export default function Home() {
+  // Access current active conversation settings from global conversation context
   const { activeConversationId, setActiveConversationId } = useConversation();
+  // Access global user session details
   const { user } = useAuth();
+  
+  // Local state representing the input message and messages log array
   const [userMsg, setUserMsg] = useState("");
   const [messages, setMessages] = useState([]);
+  
+  // References targeting UI elements for layout and scroll adjustments
   const messagesEndRef = useRef(null);
   const textareaRef = useRef(null);
 
-  /* =========================
-     AUTO SCROLL
-  ========================= */
+  /* ========================================================
+     AUTO SCROLL UTILITY
+     Pushes viewport downwards to keep the latest message in view.
+     ======================================================== */
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   };
 
+  // Trigger scroll whenever messages state updates
   useEffect(() => {
     scrollToBottom();
   }, [messages]);
 
-  /* =========================
-     REALTIME LISTENER
-  ========================= */
+  /* ========================================================
+     REAL-TIME FIRESTORE MESSAGE LISTENER
+     Listens to the collection of messages under the selected conversation ID.
+     ======================================================== */
   useEffect(() => {
     if (!user || !activeConversationId) {
       setMessages([]);
       return;
     }
 
+    // Reference the messages sub-collection ordered by creation timestamp
     const q = query(
       collection(
         db,
@@ -58,6 +79,7 @@ export default function Home() {
       orderBy("createdAt", "asc"),
     );
 
+    // Subscribe to database snapshots
     const unsubscribe = onSnapshot(q, (snapshot) => {
       const msgs = snapshot.docs.map((doc) => ({
         id: doc.id,
@@ -72,9 +94,10 @@ export default function Home() {
     return unsubscribe;
   }, [activeConversationId, user]);
 
-  /* =========================
-     SEND MESSAGE
-  ========================= */
+  /* ========================================================
+     SEND MESSAGE HANDLER
+     Handles database transactions and dispatches backend AI task requests.
+     ======================================================== */
   async function handleSend(e) {
     if (e) e.preventDefault();
     if (!user) return;
@@ -82,11 +105,13 @@ export default function Home() {
 
     const content = userMsg.trim();
     setUserMsg("");
+    // Reset textarea heights to original bounds
     if (textareaRef.current) {
       textareaRef.current.style.height = "auto";
     }
 
     // 1. OPTIMISTIC UI UPDATE
+    // Give user instant visual feedback before DB commits execute
     const tempId = `temp-${Math.random().toString(36).substring(2, 11)}`;
     setMessages((prev) => [
       ...prev,
@@ -107,7 +132,7 @@ export default function Home() {
 
     let conversationId = activeConversationId;
 
-    // Create conversation if needed
+    // Create a new parent conversation document if none is selected
     if (!conversationId) {
       const convoRef = doc(collection(db, "users", user.uid, "conversations"));
       await setDoc(convoRef, {
@@ -128,6 +153,7 @@ export default function Home() {
     );
     const convoSnap = await getDoc(convoRef);
 
+    // If chat title is placeholder, update title based on first query
     if (convoSnap.exists()) {
       const data = convoSnap.data();
       if (data.title === "New Chat" && content.length > 0) {
@@ -160,7 +186,7 @@ export default function Home() {
       },
     );
 
-    // AI loading placeholder
+    // Save initial placeholder assistant message to Firestore
     await addDoc(
       collection(
         db,
@@ -183,24 +209,26 @@ export default function Home() {
     const ipAddress = import.meta.env.VITE_SERVER_URL;
 
     try {
-      // Trigger AI
-      fetch(`${ipAddress}/ai-response`, {
+      // Trigger API to generate AI response in background
+      const response = await fetch(`${ipAddress}/ai-response`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           userId: user.uid,
           conversationId,
         }),
-      })
-        .then((res) => {
-          return res;
-        })
-        .catch((err) => {});
-    } catch (error) {}
+      });
+      if (!response.ok) {
+        console.error("AI service responded with error status:", response.status);
+      }
+    } catch (error) {
+      console.error("Network error triggering AI response:", error);
+    }
   }
 
   return (
     <div className="flex flex-col h-full absolute inset-0">
+      {/* Dynamic onboarding placeholder if no active conversation exists */}
       {!activeConversationId && messages.length === 0 && (
         <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
           <div className="w-20 h-20 bg-[#3b82f6]/10 rounded-full flex items-center justify-center mb-6 shadow-[0_0_50px_rgba(76,175,80,0.15)]">

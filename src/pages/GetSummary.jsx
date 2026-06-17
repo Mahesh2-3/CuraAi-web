@@ -1,3 +1,13 @@
+/**
+ * GetSummary.jsx
+ * 
+ * Health Summary Generation Page.
+ * - Renders an AI-generated health overview based on user clinical data logs.
+ * - Supports three time ranges: 7 Days, 30 Days, and Overall.
+ * - Caches generated markdown summaries in Firestore; refreshes if the record is > 2 days old.
+ * - Provides immediate fallback loops polling Firestore while the backend handles asynchronous AI workloads.
+ */
+
 import { useState, useEffect } from "react";
 import { auth, db } from "../lib/firebaseConfig";
 import { doc, getDoc } from "firebase/firestore";

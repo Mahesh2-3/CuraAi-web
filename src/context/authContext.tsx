@@ -1,3 +1,11 @@
+/**
+ * authContext.tsx
+ * 
+ * Global Authentication Context Provider.
+ * - Listens to Firebase auth state changes.
+ * - Exposes user, profile, and loading variables globally to React components.
+ */
+
 import { listenToAuthChanges, signOutUser } from "../lib/auth";
 import { db } from "../lib/firebaseConfig";
 import { User } from "firebase/auth";

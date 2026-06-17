@@ -1,3 +1,11 @@
+/*
+ * index.css
+ * 
+ * Global stylesheet of the CuraWeb application.
+ * Imports Tailwind CSS layers (base, components, utilities) and configures
+ * custom scrollbar styles for dark theme context across Chrome, Safari, and Firefox.
+ */
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

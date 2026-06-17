@@ -1,3 +1,13 @@
+/**
+ * Diseases.jsx
+ * 
+ * Diseases Dashboard Page.
+ * - Displays a grid listing the user's diagnosed health conditions.
+ * - Connects to Firestore query listeners (`onSnapshot`) to automatically refresh the dashboard state.
+ * - Shows threat risk ratings calculated from history records (severity analysis).
+ * - Provides a modal form allowing users to submit new conditions to the backend server.
+ */
+
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { auth, db } from "../lib/firebaseConfig";
@@ -9,7 +19,7 @@ export default function Diseases() {
   const [diseases, setDiseases] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // Modal state
+  // Modal state for adding new conditions
   const [modalVisible, setModalVisible] = useState(false);
   const [diseaseName, setDiseaseName] = useState("");
   const [diseaseDetails, setDiseaseDetails] = useState("");
@@ -188,7 +198,7 @@ export default function Diseases() {
           </p>
           <button
             onClick={() => setModalVisible(true)}
-            className="bg-zinc-800 hover:bg-zinc-800 border border-zinc-700 text-white px-6 py-2.5 rounded-lg transition-colors font-medium shadow-sm"
+            className="bg-zinc-800 hover:bg-zinc-700 border border-zinc-700 text-white px-6 py-2.5 rounded-lg transition-colors font-medium shadow-sm"
           >
             Add your first condition
           </button>
@@ -224,7 +234,7 @@ export default function Diseases() {
                         ? "bg-red-50 text-red-600 border border-red-200"
                         : isWarning
                           ? "bg-orange-50 text-orange-600 border border-orange-200"
-                          : "bg-[#3b82f6]/10 text-[#2E7D32] border border-[#3b82f6]/30"
+                          : "bg-emerald-500/10 text-emerald-500 border border-emerald-500/20"
                     }
                 `}
                   >

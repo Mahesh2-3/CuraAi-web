@@ -1,3 +1,10 @@
+/**
+ * AiDisclaimer.jsx
+ * 
+ * Medical Disclaimer Page.
+ * - Articulates legal warnings and notices specifying that CuraAi does not substitute for professional medical care.
+ */
+
 import React from "react";
 import { Link } from "react-router-dom";
 import { ArrowLeft, AlertTriangle } from "lucide-react";

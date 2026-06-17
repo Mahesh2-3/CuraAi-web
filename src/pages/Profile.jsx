@@ -1,3 +1,12 @@
+/**
+ * Profile.jsx
+ * 
+ * User Profile View.
+ * - Renders user details, body parameters, bio details, and chronic allergy conditions.
+ * - Displays profile pictures uploaded via Cloudinary.
+ * - Offers links to settings and edit profile pages.
+ */
+
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../context/authContext";

@@ -1,3 +1,10 @@
+/**
+ * SupportInfo.jsx
+ * 
+ * Support and Feedback Navigation Hub.
+ * - Routes users to FAQs page, problem reporting, terms & agreements, and AI clinical disclaimers.
+ */
+
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import {

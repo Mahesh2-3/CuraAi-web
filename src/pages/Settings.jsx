@@ -1,3 +1,10 @@
+/**
+ * Settings.jsx
+ * 
+ * Settings Menu Router.
+ * - Orchestrates routing and lists configuration links for Theme parameters, AI tone adjustments, Privacy, and FAQs.
+ */
+
 import { useState } from "react";
 import {
   ArrowLeft,

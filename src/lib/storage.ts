@@ -1,3 +1,10 @@
+/**
+ * storage.ts
+ * 
+ * Session/Local Storage Wrapper.
+ * - Standardizes read/write operations targeting browser storage spaces.
+ */
+
 export const storage = {
   async set(key: string, value: any) {
     localStorage.setItem(key, JSON.stringify(value));

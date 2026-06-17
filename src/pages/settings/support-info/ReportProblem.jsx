@@ -1,3 +1,10 @@
+/**
+ * ReportProblem.jsx
+ * 
+ * Bug Reporting Page.
+ * - Provides input forms to report system issues/bugs, dispatching alerts to the support team database.
+ */
+
 import React from "react";
 import { Link } from "react-router-dom";
 import { ArrowLeft, Send } from "lucide-react";

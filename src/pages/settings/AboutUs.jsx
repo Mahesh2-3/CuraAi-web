@@ -1,3 +1,10 @@
+/**
+ * AboutUs.jsx
+ * 
+ * Company / Team Info Page.
+ * - Renders details outlining CuraAi's purpose, background, team structure, and external social media references.
+ */
+
 import React from "react";
 import { Link } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";

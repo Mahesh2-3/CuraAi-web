@@ -1,3 +1,12 @@
+/**
+ * EditProfile.jsx
+ * 
+ * Edit Profile Form.
+ * - Provides validation and inputs for user demographic and physical parameters (e.g. age, blood group, weights).
+ * - Integrates profile image uploading via Cloudinary services.
+ * - Synchronizes updated states with backend Express API endpoints.
+ */
+
 import { useState, useEffect } from "react";
 import { useAuth } from "../context/authContext";
 import { db } from "../lib/firebaseConfig";

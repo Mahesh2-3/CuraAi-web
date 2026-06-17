@@ -1,3 +1,10 @@
+/**
+ * getUrl.tsx
+ * 
+ * API Endpoint Resolver.
+ * - Resolves target backend host URL coordinates depending on runtime context (development vs. production).
+ */
+
 const getUrl = async (publicId: string, resourceType: string) => {
 
 

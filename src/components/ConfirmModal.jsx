@@ -1,3 +1,11 @@
+/**
+ * ConfirmModal.jsx
+ * 
+ * A reusable modal component for prompting confirmation from users.
+ * Supports different action types (danger, success, info) with tailored icons,
+ * colors, styles, and animation profiles. Can function as a confirm prompt or alert dialog.
+ */
+
 import React from "react";
 import { AlertTriangle, X, CheckCircle, Info } from "lucide-react";
 

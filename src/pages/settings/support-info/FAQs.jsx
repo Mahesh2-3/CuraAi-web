@@ -1,3 +1,10 @@
+/**
+ * FAQs.jsx
+ * 
+ * FAQ Accordion.
+ * - Renders accordion-style FAQ sections addressing system usages and account queries.
+ */
+
 import React from "react";
 import { Link } from "react-router-dom";
 import { ArrowLeft, ChevronDown } from "lucide-react";

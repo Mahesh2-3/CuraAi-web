@@ -1,3 +1,10 @@
+/**
+ * DataControl.jsx
+ * 
+ * Data Management / Privacy Page.
+ * - Enables users to purge chat logs, delete disease analyses, or completely clear database profiles.
+ */
+
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import {

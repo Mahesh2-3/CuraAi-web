@@ -1,3 +1,13 @@
+/**
+ * DiseaseChat.jsx
+ * 
+ * Disease Context-Specific Chat Page.
+ * - Allows user to ask questions focused solely on a diagnosed condition (by URL parameter `id`).
+ * - Fetches disease metadata for the header display block.
+ * - Establishes real-time snapshot listeners for the `chat` sub-collection inside the specific disease record.
+ * - Dispatches optimistic chat rendering updates and saves logs in Firestore before calling the Node.js API.
+ */
+
 import { useState, useEffect, useRef } from "react";
 import { useParams, Link } from "react-router-dom";
 import { useAuth } from "../context/authContext";
@@ -17,8 +27,8 @@ import remarkGfm from "remark-gfm";
 import { Send, ArrowLeft, Activity } from "lucide-react";
 
 export default function DiseaseChat() {
-  const { id } = useParams();
-  const { user } = useAuth();
+  const { id } = useParams(); // URL params structure: /diseases/:id/chat
+  const { user } = useAuth(); // Auth Context reference
 
   const [diseaseTitle, setDiseaseTitle] = useState("Loading...");
   const [messages, setMessages] = useState([]);
@@ -48,7 +58,9 @@ export default function DiseaseChat() {
         } else {
           setDiseaseTitle("Chat");
         }
-      } catch (error) {}
+      } catch (error) {
+        console.error("Error fetching disease info:", error);
+      }
     }
     fetchDiseaseInfo();
   }, [id, user]);
@@ -116,7 +128,7 @@ export default function DiseaseChat() {
       const ipAddress = import.meta.env.VITE_SERVER_URL;
 
       // Trigger AI
-      fetch(`${ipAddress}/disease-chat`, {
+      const response = await fetch(`${ipAddress}/disease-chat`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -124,7 +136,11 @@ export default function DiseaseChat() {
           diseaseId: id,
         }),
       });
+      if (!response.ok) {
+        console.error("AI disease response returned error:", response.status);
+      }
     } catch (err) {
+      console.error("Failed to send message/trigger AI:", err);
     } finally {
       setSending(false);
     }

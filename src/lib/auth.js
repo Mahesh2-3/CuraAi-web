@@ -1,3 +1,10 @@
+/**
+ * auth.js
+ * 
+ * Auth helper configurations.
+ * - Configures Firebase auth callbacks, token parsing, and global JWT sessions.
+ */
+
 import {
   createUserWithEmailAndPassword,
   onAuthStateChanged,

@@ -1,3 +1,10 @@
+/**
+ * ChatAttachment.jsx
+ * 
+ * Component responsible for rendering attachments (images or files/PDFs) within the AI chat messages.
+ * Uses utility helpers to open files in external windows and displays resource types accordingly.
+ */
+
 import { Paperclip, FileText } from "lucide-react";
 import { openPrivateFile } from "../utils/openHelper";
 

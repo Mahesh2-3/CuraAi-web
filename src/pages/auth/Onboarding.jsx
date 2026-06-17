@@ -1,3 +1,11 @@
+/**
+ * Onboarding.jsx
+ * 
+ * User Onboarding Wizard.
+ * - Guides new users through profile configuration steps (demographics, weights/heights, medical history).
+ * - Submits final records to backend servers to build initial database structures.
+ */
+
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/authContext";
