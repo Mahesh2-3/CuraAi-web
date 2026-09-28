@@ -1,6 +1,6 @@
 /**
  * Signup.jsx
- * 
+ *
  * Account Registration Page.
  * - Manages user signup fields (email, password, phone number).
  * - Integrates Nodemailer email-based OTP verification before registering the user on Firebase.
@@ -67,6 +67,7 @@ const Signup = () => {
         body: JSON.stringify({ email: email.trim() }),
       });
       const data = await response.json();
+      console.log(data);
       if (!response.ok) throw new Error(data.error || "Failed to send OTP");
 
       setStep(2);
